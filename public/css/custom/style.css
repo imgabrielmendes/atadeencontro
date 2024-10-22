@@ -1,0 +1,307 @@
+
+body {
+    background-color: #f4f6f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Garante que o rodapé fique na parte inferior */
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo {
+    width: 80px;
+}
+
+.h11 {
+    font-size: 24px;
+    font-family: 'ITC Avant Garde Gothic', sans-serif;
+    text-align: center;
+    color: #000000;
+}
+
+.h12 {
+    font-size: 50px;
+    color: #13743C;
+    font-family: 'ITC Avant Garde Gothic', sans-serif;
+    font-weight: bolder;
+}
+
+.image-container {
+    display: flex;
+    gap: 30px;
+}
+
+h2 {
+    color: #1C2C5C;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex: 1; /* Garante que a container ocupe o espaço disponível */
+}
+
+/* input[type="text"] {
+    width: 340px;
+    border: 3px solid #1C2C5C;
+    border-radius: 12px;
+    height: 60px;
+}
+input[type="password"] {
+    width: 340px;
+    border: 3px solid #1C2C5C;
+    border-radius: 12px;
+    height: 60px;
+} */
+
+.input-container {
+    position: relative;
+}
+.input-container img {
+    position: absolute;
+    right: 10px; /* Ajuste conforme necessário */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px; /* Ajuste o tamanho conforme necessário */
+    height: auto;
+    cursor: pointer; /* Garante que o ícone não interfira na interação do campo de entrada */
+}
+
+.input-with-icon, .input-with-icon2,.input-with-icon3, .input-with-icon4{
+    padding: 10px;
+    width: 450px;
+    border: 3px solid #1C2C5C;
+    border-radius: 12px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 25px 25px;
+    padding-left: 40px;
+    box-sizing: border-box;
+}
+
+.entrar {
+    background: linear-gradient(to right, #1C2C5C, #13743C);
+    color: #FFFFFF;
+    width: auto;
+    height: 50px;
+    border-radius: 15px;
+    border: 0px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.entrar-navbar {
+    background: linear-gradient(to right, #1C2C5C, #13743C);
+    color: #FFFFFF;
+    width: wrap;
+    height: 40px;
+    border-radius: 15px;
+    padding: 7px;
+    border: 0px;
+    font-size: 16px;
+}
+
+.entrar-aprovar {
+    background: linear-gradient(to right, #1C2C5C, #13743C);
+    color: #FFFFFF;
+    width: wrap;
+    height: 30px;
+    border-radius: 15px;
+    border: 0px;
+    font-size: 16px;
+}
+
+.entrar-negar {
+    background: linear-gradient(to right, black,gray);
+    color: #FFFFFF;
+    width: wrap;
+    height: 30px;
+    border-radius: 15px;
+    border: 0px;
+    font-size: 16px;
+}
+
+
+h4 {
+    margin-bottom: 3em;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+   
+}
+
+footer img {
+    width: 100%;
+    margin-top: -3em;
+}
+
+h5 a{
+    text-decoration: none;
+    color: #1C2C5C;
+}
+
+.divisoria{
+   margin-top: -0.8em;
+}
+
+
+/* cadastrar */
+
+.cadastrar {
+    background: linear-gradient(to right, #1C2C5C, #13743C);
+    color: #FFFFFF;
+    width: 280px;
+    height: 50px;
+    border-radius: 15px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.logo2{
+    width: 60px;
+}
+
+.custom-navbar {
+    background: linear-gradient( #1C2C5C, #13743C); /* Exemplo de gradiente */
+    padding: 1rem; /* Ajusta o espaçamento ao redor do conteúdo */
+}
+
+.navbar-brand{
+    color:#FFFFFF;
+    pointer-events: none;
+    margin-right: 3em;
+    font-family: 'Crimson Text', serif;
+}
+
+.footercadastro{
+height: 2px;
+}
+
+.input-container {
+    margin-bottom: 1rem; /* Espaço entre os inputs */
+}
+
+.input-container:last-child {
+    margin-bottom: 0; /* Remove o espaçamento inferior do último container, se desejado */
+}
+
+/*Estrelas*/
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:left;
+    width:1em;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+.voltar{
+    background-color: #1C2C5C;
+    color: #FFFFFF;
+    text-decoration: none;
+    width: 13em;
+    border-radius: 5%;
+    padding: 0.5rem;
+}
+
+.img-estat{
+    width:50px; 
+    height:50px; 
+    margin: 15px;
+}
+
+.card-estatistica{
+    background: linear-gradient(to left, #1C2C5C, #13743C);
+    color: #FFFFFF;
+    font-size: 24px;
+    margin: 15px;
+}
+.header-avaliacao{
+    background: linear-gradient(to left, #1C2C5C, #13743C);
+    color: #FFFFFF;
+}
+
+
+/* pag login breeze */
+
+.logologin{
+    display: block;       /* Faz com que a imagem seja exibida como um bloco */
+    max-width: 80px;     /* Ajusta o tamanho máximo da imagem */
+    height: auto;         /* Mantém a proporção da imagem */
+    margin: 0 auto;
+}
+
+
+.h1 {
+    margin: 0;               /* Remove a margem padrão dos títulos h1 */
+    padding: 0;              /* Remove o padding padrão dos títulos h1 */
+}
+
+.logo-login {
+    max-width: 10px; /* Ajuste o tamanho conforme necessário */
+    margin: 0 auto;   /* Centraliza o logotipo horizontalmente */
+    display: block;   /* Faz com que o logotipo se comporte como um bloco */
+}
+
+/* aprovacao rh */
+.aprovar{
+    background-color: #13743C;
+    color: white;
+    border-radius: 1em;
+    text-align: center;
+    
+}
+
+.img-large {
+    width: 60%; /* Ajusta a largura para ocupar todo o espaço disponível */
+    max-width: 350px; /* Define um limite máximo se necessário */
+    height: 8px; /* Mantém a proporção da imagem */
+}
+
+
+/* minhas estatísticas */
+.img-large2 {
+    width: 60%; /* Ajusta a largura para ocupar todo o espaço disponível */
+    max-width: 280px; /* Define um limite máximo se necessário */
+    height: 8px; /* Mantém a proporção da imagem */
+}
