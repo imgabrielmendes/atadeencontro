@@ -83,14 +83,15 @@
           </div>
 
           <div class="row">
-            <select class="col mt-3 form-control" id="selecionandofacilitador" name="facilitador" multiple>
+            <label>*precisa ser um multselec aqui</label>
+            <select class="col mt-3 form-control" id="selecionandofacilitador" name="facilitador">
                 <optgroup label="Selecione Facilitadores">
-                     (pegarfa as facnull) : 
+                  @foreach ($usuarios as $usu)
                         <option value="echo facnull['id']; "
                             data-tokens="echo facnull['nome_facilitador']; ">
-                            echo facnull['nome_facilitador']; 
+                            {{$usu->name}} 
                         </option>
-                     
+                  @endforeach
                 </optgroup>
             </select>
           </div>

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class home extends Model
 {
@@ -41,5 +41,13 @@ class home extends Model
         $dadosMySql = DB::connection('mysql_other')->select("SELECT $fields FROM $table");
 
         return $dadosMySql;
+    }
+
+    public static function insertata($dados)
+    {
+        return DB::connection('mysql_other')->table('estrelaexcelencia.pin')->insert([
+
+
+        ]);
     }
 }

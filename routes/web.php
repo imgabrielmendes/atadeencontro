@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Models\home;
@@ -8,14 +9,13 @@ Route::get('/', function () {
     return redirect('/home');
 });
 
-Route::get('user', 'UserController@index')->name('user');
+Route::get('/home', [HomeController::class, 'getHome'])->middleware(['auth', 'verified']);
 
-Route::get('/home', [HomeController::class, 'getHome']);
+Route::get('/participantes', [HomeController::class, 'participantes'])->middleware(['auth', 'verified']);
 
-Route::get('/participantes', [HomeController::class, 'participantes']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('/home');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
