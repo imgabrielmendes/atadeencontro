@@ -18,9 +18,12 @@ Route::get('/home', [HomeController::class, 'getHome'])->middleware(['auth', 've
 
 Route::get('/participantes', [HomeController::class, 'participantes'])->middleware(['auth', 'verified']);
 
-Route::get('/ata/{id}', [HomeController::class, 'ataReturn'])->name('user.index');
+Route::get('/ata/{id}', [HomeController::class, 'getParticipantesPage']);
+
+Route::get('/ata/deliberacoes/{id}', [HomeController::class, 'getDeliberacoesPage']);
 
 Route::post('/registrarata', [inserts::class, 'insertAta']);
+
 
 Route::get('/dashboard', function () {
     return redirect('/home');

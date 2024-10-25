@@ -86,17 +86,11 @@
         </div>
         <br>
         <div class="p-2 col-lg-3 col-md-5 col-sm-12">
-              <button onclick="abrirHistorico()" id="botaoregistrar" type="button" class="btn form-control btn-primary" data-bs-toggle="modal">
-                Ir para histórico
-              </button>
-           
-            
-              <script>
-        function abrirHistorico() {
-            window.location.href = 'paghistorico.php';
-        }
-    </script> 
-    </div>
+          <a href="/historico" id="botaoregistrar" class="btn form-control btn-primary">
+              Ir para histórico
+          </a>
+      </div>
+      
           </div>
 
           </div>

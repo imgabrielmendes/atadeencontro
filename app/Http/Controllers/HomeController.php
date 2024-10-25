@@ -27,7 +27,7 @@ class HomeController extends Controller
         return view('home', $data)->render();
     }
 
-    public function ataReturn($id)
+    public function getParticipantesPage($id)
     {
 
         $usuarios = home::getAllUsers();
@@ -47,6 +47,26 @@ class HomeController extends Controller
 
         return view('participantes', $data)->render();
 
+    }
+
+    public function getDeliberacoesPage($id)
+    {
+        $usuarios = home::getAllUsers();
+
+        $atas = home::lastAtaforuser($id);
+        // return $atas;
+
+        $ata = $atas[0];
+
+        $dataRegistro = new \DateTime($ata->data_solicitada);
+        $ata->data_solicitada_formatada = $dataRegistro->format('d/m/Y'); 
+
+        $data = [
+            "usuarios" => $usuarios,
+            "ata" => $ata
+        ];
+
+        return view('deliberacoes', $data)->render();
     }
 
 }
