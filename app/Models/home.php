@@ -43,11 +43,20 @@ class home extends Model
         return $dadosMySql;
     }
 
-    public static function insertata($dados)
+
+    public static function lastAtaforuser($dados)
     {
-        return DB::connection('mysql_other')->table('estrelaexcelencia.pin')->insert([
-
-
-        ]);
+        $query = "
+            SELECT *,
+                usu.name as nome
+            FROM atareu.ata_has_fac as ahf
+                INNER JOIN atareu.assunto as ass ON ass.id = ahf.id_ata
+                INNER JOIN l_breeze.users as usu ON usu.id = ahf.facilitadores
+            WHERE ahf.id_ata = ?
+        ";
+    
+        $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
+        return $dadosMySql;
     }
+    
 }

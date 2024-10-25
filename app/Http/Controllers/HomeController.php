@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
 
+
     public function getHome()
     {
 
         $locais = home::getAllLocais();
         // return $locais;
         $usuarios = home::getAllUsers();
-
-        // return view('home')->render();
+        // return $usuarios;
 
         $data = [
             "usuarios" => $usuarios,
@@ -27,8 +27,26 @@ class HomeController extends Controller
         return view('home', $data)->render();
     }
 
-    public function participantes()
+    public function ataReturn($id)
     {
-        return view('participantes')->render();
+
+        $usuarios = home::getAllUsers();
+
+        $atas = home::lastAtaforuser($id);
+        // return $atas;
+
+        $ata = $atas[0];
+
+        $dataRegistro = new \DateTime($ata->data_solicitada);
+        $ata->data_solicitada_formatada = $dataRegistro->format('d/m/Y'); 
+
+        $data = [
+            "usuarios" => $usuarios,
+            "ata" => $ata
+        ];
+
+        return view('participantes', $data)->render();
+
     }
+
 }

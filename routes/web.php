@@ -2,8 +2,13 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InsertsController;
+
 use App\Models\home;
+use App\Models\inserts;
+
 
 Route::get('/', function () {
     return redirect('/home');
@@ -13,6 +18,9 @@ Route::get('/home', [HomeController::class, 'getHome'])->middleware(['auth', 've
 
 Route::get('/participantes', [HomeController::class, 'participantes'])->middleware(['auth', 'verified']);
 
+Route::get('/ata/{id}', [HomeController::class, 'ataReturn'])->name('user.index');
+
+Route::post('/registrarata', [inserts::class, 'insertAta']);
 
 Route::get('/dashboard', function () {
     return redirect('/home');

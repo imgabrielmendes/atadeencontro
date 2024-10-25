@@ -7,8 +7,6 @@ console.log();
     var addItemButton = document.getElementById('addItemButton');
     var mensagemInfo = document.getElementById('infoMessage');
 
-
-
 addItemButton.addEventListener('click', function() {
 
     var newItem = document.getElementById('item').value.trim();

@@ -19,24 +19,24 @@
     <br>
     <div class="col-sm-12 col-xl-3  col-md-6">
         <label><b>Data*:</b></label>
-        <ul class="form-control bg-body-secondary">  echo _['data'];  </ul>
+        <ul class="form-control bg-body-secondary"> {{ substr($ata->data_solicitada_formatada, 0, 10) }}  </ul>
     </div>
 
     <!---ABA DE HORÁRIO INICIO---->
     <div class="col-sm-12 col-xl-3  col-md-6">
         <label for="nomeMedico"><b>Horário de Início*:</b></label>
         <br>
-        <ul class="form-control bg-body-secondary"> echo _['horainicio']; </ul>
+        <ul class="form-control bg-body-secondary"> {{ substr($ata->hora_inicial, 0, 5) }} </ul>
     </div>
 
     <!---ABA DE HORÁRIO TERMINO---->
     <div class="col-sm-12 col-xl-3  col-md-6">
         <label for="form-control"> <b> Horário de Término:</b> </label>
-        <ul class="form-control bg-body-secondary"> echo _['horaterm']; </ul>
+        <ul class="form-control bg-body-secondary"> {{ substr($ata->hora_termino, 0, 5) }} </ul>
     </div>
 
     <!---ABA DE TEMPO ESTIMADO ---->
-    <div class="col-sm-12 col-xl-3  col-md-6">
+    {{-- <div class="col-sm-12 col-xl-3  col-md-6">
         <label for="form-control"><b>Tempo Estimado:</b></label>
         
         // Verifica se as variáveis estão definidas antes de calcular o tempo estimado
@@ -45,22 +45,22 @@
                 width: 100%;
             }
         </style>
-    </div>
+    </div> --}}
 </div>
 
 <div class="row">
     <div class="facilitadorcol col-lg-6  col-lg-md-12 col-md-12">
         <label><b >Facilitador(es):</b></label>
-        <ul class=" mt-2 form-control bg-body-secondary"> echo facilitadoresString; </ul>
+        <ul class=" mt-2 form-control bg-body-secondary"> {{ $ata->name }} </ul>
     </div>
     <div class="col-lg-3  col-lg-md-12 col-md-6">
         <label><b>Local:</b></label>
-        <ul class=" mt-2 form-control bg-body-secondary border rounded"> echo _['local']; </ul>
+        <ul class=" mt-2 form-control bg-body-secondary border rounded"> {{$ata->local}} </ul>
     </div>
     <div class="col-lg-3  col-lg-md-12 col-md-6">
         <label for="form-control"> <b>Objetivo:</b> </label>
         <label class=" mt-2 form-control bg-body-secondary border rounded">
-            <input type="checkbox" disabled checked>  echo _['objetivoSelecionado']; 
+            <input type="checkbox" disabled checked> {{$ata->objetivo}} 
     </div>
     <div>
         <div class="col">
@@ -68,7 +68,7 @@
         </div>
         <div>
             <div class="col-12">
-                <ul class="form-control bg-body-secondary"> echo _['conteudo']; </ul>
+                <ul class="form-control bg-body-secondary"> {{$ata->tema}} </ul>
             </div>
         </div>       
     </div>

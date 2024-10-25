@@ -45,11 +45,12 @@
                     <div class="col" > 
                     <select  class="col form-control" id="participantesadicionados" name="facilitador" multiple style="width: 100px;">
                       <optgroup label="Selecione Facilitadores">
-                           (pegarfa as facnull) : 
-                              <option value=" echo facnull['id']; "
+                        @foreach ($usuarios as $usu)
+                        <option value=" echo facnull['id']; "
                                   data-tokens=" echo facnull['nome_facilitador']; ">
-                                   echo facnull['nome_facilitador']; 
-                              </option>  
+                                   {{ $usu->name }} 
+                              </option> 
+                        @endforeach 
                        </optgroup>
                     </select>
         </div>
@@ -85,7 +86,7 @@
         </div>
         <br>
         <div class="p-2 col-lg-3 col-md-5 col-sm-12">
-              <button onclick="abrirHistorico()"  id="botaoregistrar" type="button" class="btn form-control btn-primary" data-bs-toggle="modal">
+              <button onclick="abrirHistorico()" id="botaoregistrar" type="button" class="btn form-control btn-primary" data-bs-toggle="modal">
                 Ir para histórico
               </button>
            
