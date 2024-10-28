@@ -18,11 +18,12 @@ Route::get('/home', [HomeController::class, 'getHome'])->middleware(['auth', 've
 
 Route::get('/participantes', [HomeController::class, 'participantes'])->middleware(['auth', 'verified']);
 
+Route::post('/registrarata', [inserts::class, 'insertAta']);
 Route::get('/ata/{id}', [HomeController::class, 'getParticipantesPage']);
 
+Route::get('/registrarparticipantes', [inserts::class, 'insertParticipantes']);
 Route::get('/ata/deliberacoes/{id}', [HomeController::class, 'getDeliberacoesPage']);
 
-Route::post('/registrarata', [inserts::class, 'insertAta']);
 
 
 Route::get('/dashboard', function () {

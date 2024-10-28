@@ -66,8 +66,17 @@ class inserts extends Model
         } else {
 
             return response()->json(['success' => false, 'message' => 'Falha ao registrar a ata.'], 500);
-            
+
         }
     }
     
+    /**
+     * 
+     * Método responsável em enviar o ID dos participantes da ata para o DB
+     */
+    public function insertParticipantes()
+    {
+
+        
+    }
 }
