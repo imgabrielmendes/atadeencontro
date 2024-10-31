@@ -88,10 +88,26 @@ class inserts extends Model
         ];
     
         $id = DB::connection('mysql_other')->table('atareu.ata_has_fac')->insertGetId($dados);
-    
-        // Aqui você pode fazer a  inserção no banco de dados usando a $id_ata
-    
+        
         return response()->json(['success' => true, 'message' => 'Participantes registrados com sucesso!', 'id' => $id_ata]);
+    }
+
+    public function insertTextoPrincipal(Request $request)
+    {
+
+        Log::info('TEXTO PRINCIPAL recebidos:', $request->all());
+
+        $id_ata = $request->input('id_ata');
+        $textoprincipal = $request->input('caixadetexto');
+
+        $dados = [
+            'id_ata' => $id_ata,
+            'texto_princ' => $textoprincipal,
+        ];
+
+        $id = DB::connection('mysql_other')->table('atareu.textoprinc')->insertGetId($dados);
+        return response()->json(['success' => true, 'message' => 'Participantes registrados com sucesso!', 'id' => $id_ata]);
+
     }
     
 }

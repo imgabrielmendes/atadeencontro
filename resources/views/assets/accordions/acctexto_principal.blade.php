@@ -16,16 +16,15 @@
     <div class="row">
     <div class ="col">
       <label style="height: 35px;"><b>Informe o texto principal:</b></label>
-      <textarea id="textoprinc" style="height: 110px;" class="form-control"></textarea>
+      <textarea id="caixadetexto" style="height: 110px;" class="form-control"></textarea>
     
             </div>
     </div>   
       
     <div class="d-flex justify-content-center">
-          <button id="abrirhist" type="button" class="btn btn-primary" data-bs-toggle="modal">Registrar Texto</button>
+          <button id="btntextoregistrar" type="button" class="btn btn-primary" data-bs-toggle="modal">Registrar Texto</button>
       </div>
-    
-          </div>          
+        </div>          
     </div>
     
     </div>

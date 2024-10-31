@@ -24,6 +24,9 @@ Route::get('/ata/{id}', [HomeController::class, 'getParticipantesPage']);
 Route::post('/registrarparticipantes', [inserts::class, 'insertParticipantes']);
 Route::get('/ata/deliberacoes/{id}', [HomeController::class, 'getDeliberacoesPage']);
 
+Route::post('/registrartexto', [inserts::class, 'insertTextoPrincipal']);
+
+
 
 
 Route::get('/dashboard', function () {

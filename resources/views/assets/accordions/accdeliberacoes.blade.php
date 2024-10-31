@@ -32,13 +32,12 @@
       <label for="" class="mb-2">Deliberado para:</label>
       <select id="deliberador" class="form-control facilitator-select" placeholder="Deliberações" multiple>
       <optgroup label="Selecione Facilitadores">
-                ata foreach ($pegarde as $facnull) : ata
-                    <option value="ata echo $facnull['id']; ata"
-                        data-tokens="ata echo $facnull['nome_facilitador']; ata">
-                        ata echo $facnull['nome_facilitador']; ata
+                @foreach($usuarios as $usuario)
+                    <option value="{{$usuario->id}}" data-tokens="{{$usuario->name}}">
+                        {{$usuario->name}}
                     </option>
-                ata endforeach ata
-            </optgroup>
+                @endforeach
+      </optgroup>
       </select>
     </div>
       </div>
