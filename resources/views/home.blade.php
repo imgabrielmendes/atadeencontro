@@ -73,8 +73,8 @@
         <div class="row">
           <div class="col d-flex justify-content-center">
             <div class="btn-atas p-4">
-              <button id="botaoregistrar" type="button" class="mt-2 col-md-5 col-sm-12 col-lg-3 btn btn-success">salvar</button>
-              <button id="botaoregistrar" type="button" class="mt-2 col-md-5 col-sm-12 col-lg-3 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modaldeemail">Cadastre-se</button>
+              <button id="botaoregistrar" type="button" class="mt-2 col-md-5 col-sm-12 col-lg-4 btn btn-success">salvar</button>
+              <button id="botaoregistraarr" type="button" class="mt-2 col-md-5 col-sm-12 col-lg-7 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modaldeemail">Cadastre-se</button>
             </div>
           </div>
         </div>

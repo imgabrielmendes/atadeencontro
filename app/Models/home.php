@@ -58,5 +58,22 @@ class home extends Model
         $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
         return $dadosMySql;
     }
+
+    public static function lastParticipantesforata($dados)
+    {
+        $query = "
+        SELECT 
+        ahf.id_ata,
+        us.* 
+
+        FROM atareu.ata_has_fac as ahf
+            INNER JOIN l_breeze.users as us
+                ON us.id = ahf.facilitadores
+                where ahf.id_ata = ?
+        ";
+
+        $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
+        return $dadosMySql;
+    }
     
 }

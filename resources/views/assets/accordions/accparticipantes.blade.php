@@ -5,7 +5,6 @@
         <i class="fa-solid fa-user p-1 mb-1"></i>
     <h5>Participantes</h5>
     </div>
-      </h2>                                                                                                                                       
             <div class="container-fluid ">
             <div class="row">
               <form id="addForm">
@@ -25,15 +24,12 @@
                            </optgroup>
                         </select>
             </div>
-            </div></div>
               
               </form>
               <div  class="row">
               <div class="col-lg-12 col-md-2 d-flex text-center">
-                <button style="background-color:white; color:#353535; border:none; font-size: 13px;" id="botaoregistrar" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modaldeemail">
+                <button style="background-color:white; color:#353535; border:none; font-size: 13px;" id="btnusuario" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modaldeemail">
                   Clique aqui para cadastrar usuário
               </button>              
-           </div>
 
-          </div>
-        </div>
+      

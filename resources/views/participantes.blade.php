@@ -2,6 +2,8 @@
 @section('title', 'Ata de encontro | Participantes')
 @section('content')
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <div class="box box-primary">
     <main class="container_fluid d-flex justify-content-center align-items-center">
       
@@ -35,7 +37,7 @@
         {{-- ///////////// --}}
         
         <div class="p-2 col-lg-3 col-md-5 col-sm-12">
-          <a href="/historico" id="botaoregistrar" class="btn form-control btn-primary">
+          <a href="/historico"  class="btn form-control btn-primary">
               Ir para histórico
           </a>
       </div>

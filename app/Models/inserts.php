@@ -74,9 +74,24 @@ class inserts extends Model
      * 
      * Método responsável em enviar o ID dos participantes da ata para o DB
      */
-    public function insertParticipantes()
+    public function insertParticipantes(Request $request)
     {
 
-        
+        Log::info('Dados recebidos:', $request->all());
+
+        $id_ata = $request->input('id_ata');
+        $participantes = $request->input('participantes');
+
+        $dados = [
+            'id_ata' => $id_ata,
+            'facilitadores' => $participantes,
+        ];
+    
+        $id = DB::connection('mysql_other')->table('atareu.ata_has_fac')->insertGetId($dados);
+    
+        // Aqui você pode fazer a  inserção no banco de dados usando a $id_ata
+    
+        return response()->json(['success' => true, 'message' => 'Participantes registrados com sucesso!', 'id' => $id_ata]);
     }
+    
 }

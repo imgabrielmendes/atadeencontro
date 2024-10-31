@@ -37,6 +37,8 @@ class HomeController extends Controller
 
         $ata = $atas[0];
 
+        // return $ata;
+
         $dataRegistro = new \DateTime($ata->data_solicitada);
         $ata->data_solicitada_formatada = $dataRegistro->format('d/m/Y'); 
 
@@ -49,24 +51,27 @@ class HomeController extends Controller
 
     }
 
-    public function getDeliberacoesPage()
+    public function getDeliberacoesPage($id)
     {
-        // $usuarios = home::getAllUsers();
+        $usuariosdaata = home::lastParticipantesforata($id);
+        // return $usuariosdaata;
 
-        // $atas = home::lastAtaforuser($id);
-        // // return $atas;
+        $atas = home::lastAtaforuser($id);
+        // return $atas;
 
-        // $ata = $atas[0];
+        $ata = $atas[0];
 
-        // $dataRegistro = new \DateTime($ata->data_solicitada);
-        // $ata->data_solicitada_formatada = $dataRegistro->format('d/m/Y'); 
+        // return $ata;
 
-        // $data = [
-        //     "usuarios" => $usuarios,
-        //     "ata" => $ata
-        // ];
+        $dataRegistro = new \DateTime($ata->data_solicitada);
+        $ata->data_solicitada_formatada = $dataRegistro->format('d/m/Y'); 
 
-        return view('deliberacoes')->render();
+        $data = [
+            "usuarios" => $usuariosdaata,
+            "ata" => $ata
+        ];
+
+        return view('deliberacoes', $data)->render();
     }
 
 }

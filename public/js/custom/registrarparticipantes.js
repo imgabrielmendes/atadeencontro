@@ -1,32 +1,32 @@
+document.addEventListener("DOMContentLoaded", function() {
+    var btnparticipantes = document.getElementById("btnparticipantes");
+    btnparticipantes.addEventListener('click', function() {
+        registrarParticipantes();
+    });
 
-var btnparticipantes = document.getElementById("btnparticipantes");
+    function registrarParticipantes() {
+        var participantes = document.getElementById("participantesadicionados").value;
+        var urlParts = window.location.pathname.split('/');
+        var ataId = urlParts[urlParts.length - 1];
 
-btnparticipantes.addEventListener('click', registrarParticipantes);
+        var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-function registrarParticipantes() 
-{
+        $.ajax({
+            url: '/registrarparticipantes',
+            method: 'POST',
+            data: {
+                participantes: participantes,
+                id_ata: ataId, 
+                _token: token
+            },
+            success: function(response) {
 
-    var participantes = document.getElementById("participantesadicionados").value;
-
-    console.log(participantes);
-
-    $.ajax({
-        url: '/insertParticipantes',
-        method: 'POST',
-        data: {
-            participantes: participantes
-        },
-        success: function (response) {
-
-            window.location.href = `/ata/deliberacoes/${response.id}`;
-            console.log("Resposta do servidor:", response);
-            
-        },
-        error: function (xhr, status, error) {
-            console.error('Erro na solicitação AJAX:', error);
-            console.error('Status:', status);
-            console.error('Response:', xhr.responseText);
-        }
-    }); 
-
-}
+                window.location.href = `/ata/deliberacoes/${response.id}`;
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro na solicitação AJAX:', error);
+                console.error('Response:', xhr.responseText);
+            }
+        });
+    }
+});

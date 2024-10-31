@@ -21,7 +21,7 @@ Route::get('/participantes', [HomeController::class, 'participantes'])->middlewa
 Route::post('/registrarata', [inserts::class, 'insertAta']);
 Route::get('/ata/{id}', [HomeController::class, 'getParticipantesPage']);
 
-Route::get('/registrarparticipantes', [inserts::class, 'insertParticipantes']);
+Route::post('/registrarparticipantes', [inserts::class, 'insertParticipantes']);
 Route::get('/ata/deliberacoes/{id}', [HomeController::class, 'getDeliberacoesPage']);
 
 
