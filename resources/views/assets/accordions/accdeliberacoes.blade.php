@@ -63,7 +63,7 @@
           confirmButtonText: "OK"
         }).then((result) => {
           if (result.isConfirmed) {
-              window.location.href = "paghistorico.php";
+            window.location.href = `/ata/historico`;
           }
         });
         });

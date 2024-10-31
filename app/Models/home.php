@@ -75,5 +75,42 @@ class home extends Model
         $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
         return $dadosMySql;
     }
+
+    /**
+     * 
+     * METODO QUE RETORNAR TODAS AS ATAS EM QUE O USUÁRIO CRIOU OU PARTICIPOU
+     */
+    public static function ataInformationsforID($dados)
+    {
+
+        $query = "
+            SELECT 
+            us.name,
+            ass.id,
+            ass.data_solicitada,
+            ass.local,
+            ass.objetivo,
+            ass.status,
+            ass.tema,
+            
+            ahf.facilitadores,
+
+            tp.texto_princ
+
+            FROM atareu.assunto as ass
+                INNER JOIN atareu.ata_has_fac as ahf
+                    ON ahf.id_ata = ass.id
+                INNER JOIN atareu.textoprinc as tp
+                    ON tp.id_ata = ass.id
+                INNER JOIN l_breeze.users as us
+                    ON us.id = ahf.facilitadores
+                    
+                    where ahf.facilitadores = ?
+        ";
+
+        $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
+        return $dadosMySql;
+
+    }
     
 }

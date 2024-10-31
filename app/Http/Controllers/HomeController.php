@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\home;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 
@@ -72,6 +73,21 @@ class HomeController extends Controller
         ];
 
         return view('deliberacoes', $data)->render();
+    }
+
+    public function getHistoricoPage()
+    {
+        $usuarioId = Auth::id();
+        // return $usuarioId;
+
+        $ata = home::ataInformationsforID($usuarioId);
+        // return $ata;
+
+        $dados = [
+            "ata" => $ata
+        ];
+
+        return view('historico', $dados)->render();
     }
 
 }

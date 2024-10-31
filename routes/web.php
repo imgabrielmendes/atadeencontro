@@ -27,7 +27,7 @@ Route::get('/ata/deliberacoes/{id}', [HomeController::class, 'getDeliberacoesPag
 Route::post('/registrartexto', [inserts::class, 'insertTextoPrincipal']);
 
 
-
+Route::get('/historico', [HomeController::class, 'getHistoricoPage']);
 
 Route::get('/dashboard', function () {
     return redirect('/home');
