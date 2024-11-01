@@ -6,27 +6,25 @@ use App\Models\home;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-
-
 class HomeController extends Controller
 {
 
 
     public function getHome()
     {
-
         $locais = home::getAllLocais();
-        // return $locais;
-        $usuarios = home::getAllUsers();
-        // return $usuarios;
+        $usuarios = collect(home::getAllUsers())->unique('id');
 
+        // return $usuarios;
+    
         $data = [
-            "usuarios" => $usuarios,
+            "usuarios" => $usuarios->values(),
             "locais" => $locais
         ];
-
+    
         return view('home', $data)->render();
     }
+    
 
     public function getParticipantesPage($id)
     {

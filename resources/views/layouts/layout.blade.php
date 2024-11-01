@@ -14,8 +14,11 @@
         <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.0/dist/sweetalert2.min.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css\custom\style.css') }}">
         <link rel="stylesheet" href="https://use.typekit.net/your-project-id.css">
-        <link rel="stylesheet"
-            href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/css/multi-select-tag.css">
+
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.x.x/dist/tailwind.min.css">
     </head>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid ">
@@ -151,6 +154,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.0/dist/sweetalert2.all.min.js"></script>
         {{-- <script src="{{ asset('js\custom\canvasjs.min.js') }}"></script> --}}
         <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/js/multi-select-tag.js"></script>
+        <script src="//unpkg.com/alpinejs" defer></script>
         @stack('scripts')
     </body>
     

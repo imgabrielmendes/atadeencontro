@@ -1,4 +1,4 @@
-<table id="" class="table table-striped">
+<table id="" class="table table-striped shadow">
     <tbody>
         <div class="accordion" id="accordionPanelsStayOpenExample" class="text-center">
             <div class="accordion-item text-center">

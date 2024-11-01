@@ -10,22 +10,17 @@ use App\Models\home;
 use App\Models\inserts;
 
 
-Route::get('/', function () {
-    return redirect('/home');
-});
-
+Route::get('/', function () { return redirect('/home'); });
 Route::get('/home', [HomeController::class, 'getHome'])->middleware(['auth', 'verified']);
 
 Route::get('/participantes', [HomeController::class, 'participantes'])->middleware(['auth', 'verified']);
 
-Route::post('/registrarata', [inserts::class, 'insertAta']);
-Route::get('/ata/{id}', [HomeController::class, 'getParticipantesPage']);
-
+Route::post('/registrarata', [inserts::class, 'insertAta'])->middleware(['auth', 'verified']);
 Route::post('/registrarparticipantes', [inserts::class, 'insertParticipantes']);
-Route::get('/ata/deliberacoes/{id}', [HomeController::class, 'getDeliberacoesPage']);
-
 Route::post('/registrartexto', [inserts::class, 'insertTextoPrincipal']);
 
+Route::get('/ata/{id}', [HomeController::class, 'getParticipantesPage']);
+Route::get('/ata/deliberacoes/{id}', [HomeController::class, 'getDeliberacoesPage']);
 
 Route::get('/historico', [HomeController::class, 'getHistoricoPage']);
 

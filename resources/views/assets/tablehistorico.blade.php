@@ -16,10 +16,10 @@
 
 @foreach($ata as $atas)
 <tr>
-<td class='align-middle' onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->data_solicitada}} </td>;
-<td class='align-middle' onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->objetivo}} </td>;
-<td class='text-start'   onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->tema}} </td>;
-<td class='text-start'' onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->local}}</td>;
+<td class='align-middle' onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->data_solicitada}} </td>
+<td class='align-middle' onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->objetivo}} </td>
+<td class='text-start'   onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->tema}} </td>
+<td class='text-start'' onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->local}}</td>
 <td class='align-middle status-cell' onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->status}} 
 {{-- <td class='align-middle status-cell' onclick='abrirModalDetalhes(" . json_encode($row) . ")'> . ($row['status'] === 'ABERTA' ? <span class='badge bg-primary'>ABERTA</span>" : "<span class='badge bg-success'>FECHADA</span>") . </td> --}}
 
@@ -67,12 +67,6 @@ $deliberacoes = $puxarform->buscarDeliberacoesPorIdAta($id);
                 </td>";
     } --}}
     
-   
-
-
-
-
-    ;
 <td class='align-middle' style='display:none;' onclick='abrirModalDetalhes(" . json_encode($row) . ")'>
 
 {{-- <td class='align-middle' style='display:none;' id='participantes" . $row['id'] . "'>"; 
@@ -124,7 +118,7 @@ if (isset($row['id'])) {
             $deliberadores_concatenados = implode(", ", $deliberadores); --}}
             <div class='deliberador'>" . $deliberadores_concatenados . "</div>
             </div><br> // Adiciona uma quebra de linha após cada bloco de deliberação
-        }
+        
         </td>
         <td  class='deliberador-cell text-left' style='display:none;' id='deliberadores" . $row['id'] . "'>
         {{-- // Exibe os deliberadores associados a cada deliberação única
@@ -132,24 +126,17 @@ if (isset($row['id'])) {
             $deliberadores_concatenados = implode(", ", $deliberadores); --}}
             <div class='col-6 bg-body-secondary form-control deliberador'>" . $deliberadores_concatenados . "</div>
             <br>"; // Adiciona uma quebra de linha após cada bloco de deliberadores
-        }
+        
         </td>
-    }
+    
         <td class='deliberacao-cell align-middle' style='display:none;' id='deliberacoes" . $row['id'] . "'>
         <div class='col-6 bg-body-secondary form-control'>Nenhuma deliberação</div>
-        </td>";
+        </td>
         
         <td class='deliberador-cell align-middle' style='display:none;' id='deliberadores" . $row['id'] . "'>
         <div class='col-6 bg-body-secondary form-control'>Nenhum deliberador</div>
         </td>
-    }
-    
-    
-    
-    
-      
-    
-}                     
+                   
 
 </tr>
 {{-- }

@@ -6,9 +6,11 @@
 <div class="container_fluid d-flex justify-content-center align-items-center">
   <div class="form-group col-8 mt-5">
     <div class="row">
+
       <div class="col-md-12 text-center m-3 p-2">
-        <h2><b>Formulário de Solicitação</b></h2>
+        <h1><b>Formulário de Solicitação</b></h1>
       </div>
+
       <div class="col-xl-4 col-lg-xl-3 col-md-6">
         <label><b>Data*</b></label>
         <input id="datainicio" class="mt-2 mb-2 form-control" placeholder="dd-mm-aaaa" type="date">
@@ -59,13 +61,10 @@
         <div class="col mt-3"> <label for="form-control"> <b> Facilitador(res) responsável*:</b> </label> 
         </div>
         <div class="row">
-          <select class="col mt-3 form-control" id="selecionandofacilitador" name="facilitador">
-            <optgroup label="Selecione Facilitadores">
-              @foreach ($usuarios as $usu)
-                <option value="{{$usu->id}}">{{$usu->name}}</option>
-              @endforeach
-            </optgroup>
-          </select>
+          {{-- <select class="col mt-3 form-control" id="selecionandofacilitador" name="facilitador"> --}}
+            <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+            @include("multiselect")
+
         </div>
         <div class="col mt-2"><b>Tema*:</b>
           <input id="temaprincipal" class="mt-2 form-control" type="text" />

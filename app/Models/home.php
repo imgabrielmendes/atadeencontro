@@ -24,12 +24,8 @@ class home extends Model
 
     public static function getAllUsers()
     {
-        $table = "l_breeze.users";
-        $fields = "*";
-        $where = "";
-    
-        $dadosMySql = DB::connection('mysql')->select("SELECT $fields FROM $table");
-        return $dadosMySql;
+        return User::all();
+       
     }
 
     public static function pegarAtas()
@@ -84,28 +80,31 @@ class home extends Model
     {
 
         $query = "
-            SELECT 
-            us.name,
-            ass.id,
-            ass.data_solicitada,
-            ass.local,
-            ass.objetivo,
-            ass.status,
-            ass.tema,
-            
-            ahf.facilitadores,
+        SELECT 
 
-            tp.texto_princ
+        us.name,
 
-            FROM atareu.assunto as ass
-                INNER JOIN atareu.ata_has_fac as ahf
-                    ON ahf.id_ata = ass.id
-                INNER JOIN atareu.textoprinc as tp
-                    ON tp.id_ata = ass.id
-                INNER JOIN l_breeze.users as us
-                    ON us.id = ahf.facilitadores
-                    
-                    where ahf.facilitadores = ?
+        ass.id,
+        ass.data_solicitada,
+        ass.local,
+        ass.objetivo,
+        ass.status,
+        ass.tema,
+        
+        ahf.facilitadores,
+        tp.texto_princ
+
+        FROM atareu.assunto as ass
+            INNER JOIN atareu.ata_has_fac as ahf
+                ON ahf.id_ata = ass.id
+            INNER JOIN atareu.textoprinc as tp
+                ON tp.id_ata = ass.id
+            INNER JOIN l_breeze.users as us
+                ON us.id = ahf.facilitadores
+                
+                where ahf.facilitadores = ?
+                
+                ;
         ";
 
         $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
@@ -113,4 +112,6 @@ class home extends Model
 
     }
     
+
+
 }
