@@ -61,8 +61,7 @@
         <div class="col mt-3"> <label for="form-control"> <b> Facilitador(res) responsável*:</b> </label> 
         </div>
         <div class="row">
-          {{-- <select class="col mt-3 form-control" id="selecionandofacilitador" name="facilitador"> --}}
-            <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
             @include("multiselect")
 
         </div>
@@ -81,5 +80,5 @@
     </div>
   </div>
 </div>
-
+<script src="{{ asset('js\custom\multiselect.js') }}" defer></script>
 @endsection

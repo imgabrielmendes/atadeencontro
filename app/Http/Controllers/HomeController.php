@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function getHome()
     {
         $locais = home::getAllLocais();
-        $usuarios = collect(home::getAllUsers())->unique('id');
+        $usuarios = home::getAllUsers()->unique('id');
 
         // return $usuarios;
     
