@@ -20,10 +20,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         var local = document.getElementById("pegarlocal").value;
-        var facilitadores = Array.from(document.getElementById("selecionandofacilitador").selectedOptions).map(option => option.value);
+
+        var alpineComponent = document.querySelector("[x-data]");
+        var facilitadores = alpineComponent.__x.selectedOptions.map(opt => opt.id);
+
         var tema = document.getElementById("temaprincipal").value;
 
-        if (!data || !hora_inicio || !hora_final || !objetivoSelecionado || !local || !facilitadores.length || !tema) {
+        if (!data || !hora_inicio || !hora_final || !objetivoSelecionado || !local || !tema) {
             console.error('Por favor, preencha todos os campos.');
             return;
         }
@@ -44,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 _token: token
             },
             success: function(response) {
-                
                 window.location.href = `/ata/${response.id}`;
             },
             error: function(xhr, status, error) {
