@@ -1,7 +1,7 @@
 
 
 @extends('layouts.layout')
-@section('title', 'Ata de encontro | Participantes')
+@section('title', 'Ata de encontro | Histórico')
 @section('content')
 
 {{-- // include("vendor/autoload.php");

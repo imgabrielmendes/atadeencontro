@@ -15,14 +15,9 @@
                       <label for="item"><b>Informe os participantes</b></label>
     
                       <div class="row">
-                        <div class="col" > 
-                        <select  class="col form-control" id="participantesadicionados" name="facilitador" multiple style="width: 100px;">
-                          <optgroup label="Selecione Facilitadores">
-                            @foreach ($usuarios as $usu)
-                               <option value="{{$usu->id}}"> {{ $usu->name }} </option> 
-                            @endforeach 
-                           </optgroup>
-                        </select>
+                        <div class="mt-3 mb-3" > 
+                          @include("multiselect")
+
             </div>
               
               </form>

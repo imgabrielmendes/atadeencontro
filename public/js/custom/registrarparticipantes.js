@@ -5,17 +5,28 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function registrarParticipantes() {
-        var participantes = document.getElementById("participantesadicionados").value;
+
+        var selectedOptions = new Set();
+        document.querySelectorAll("#options-container .cursor-pointer").forEach(function(optionElement) {
+            if (optionElement.classList.contains('bg-gray-100')) {
+                selectedOptions.add(optionElement.dataset.id);
+            }
+        });
+        
         var urlParts = window.location.pathname.split('/');
         var ataId = urlParts[urlParts.length - 1];
 
         var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
+        console.log({
+            participantes: Array.from(selectedOptions),
+        })
+
         $.ajax({
             url: '/registrarparticipantes',
             method: 'POST',
             data: {
-                participantes: participantes,
+                participantes: Array.from(selectedOptions),
                 id_ata: ataId, 
                 _token: token
             },

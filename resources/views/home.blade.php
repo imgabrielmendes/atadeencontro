@@ -7,8 +7,8 @@
   <div class="form-group col-8 mt-5">
     <div class="row">
 
-      <div class="col-md-12 text-center m-3 p-2">
-        <h1><b>Formulário de Solicitação</b></h1>
+      <div class="col-md-12 text-center mb-4 m-3 p-2">
+        <p class="fs-1"><b> Formulário de Solicitação </b></p>
       </div>
 
       <div class="col-xl-3 col-lg-xl-3 col-md-6">

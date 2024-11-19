@@ -72,16 +72,37 @@ class inserts extends Model
         Log::info('Dados recebidos:', $request->all());
 
         $id_ata = $request->input('id_ata');
-        $participantes = $request->input('participantes');
+        $participantes = $request->participantes;
 
-        $dados = [
-            'id_ata' => $id_ata,
-            'facilitadores' => $participantes,
-        ];
-    
-        $id = DB::connection('mysql_other')->table('atareu.ata_has_fac')->insertGetId($dados);
-        
-        return response()->json(['success' => true, 'message' => 'Participantes registrados com sucesso!', 'id' => $id_ata]);
+        // return $participantes
+
+        // $dados = [
+        //     'id_ata' => $id_ata,
+        //     'participantes' => $part,
+        // ];
+
+        $dados = [];
+        foreach ($participantes as $part) {
+
+            $dados = [
+                'id_ata' => $id_ata,
+                'participantes' => $part,
+            ];
+
+        }
+
+        try {
+
+            DB::connection('mysql_other')->table('atareu.participantes')->insert($dados);
+
+            return response()->json(['success' => true, 'message' => 'Ata e facilitadores registrados com sucesso!', 'id' => $id_ata]);
+
+        } catch (\Exception $e) {
+            Log::error('Erro ao inserir facilitadores:', ['error' => $e->getMessage()]);
+
+            return response()->json(['success' => true, 'message' => 'Participantes registrados com sucesso!', 'id' => $id_ata]);
+        }
+
     }
 
     public function insertTextoPrincipal(Request $request)

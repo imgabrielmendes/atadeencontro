@@ -51,7 +51,10 @@
 <div class="row">
     <div class="facilitadorcol col-lg-6  col-lg-md-12 col-md-12">
         <label><b >Facilitador(es):</b></label>
-        <ul class=" mt-2 form-control bg-body-secondary"> {{ $ata->name }} </ul>
+        {{-- @foreach ($ata as $usu)    
+        <ul class=" mt-2 form-control bg-body-secondary"> {{ $usu->nome }} </ul>
+        @endforeach --}}
+        <ul class=" mt-2 form-control bg-body-secondary"> {{ $ata->nome }} </ul>
     </div>
     <div class="col-lg-3  col-lg-md-12 col-md-6">
         <label><b>Local:</b></label>

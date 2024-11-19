@@ -47,6 +47,8 @@ class HomeController extends Controller
             "ata" => $ata
         ];
 
+        // return $ata;
+
         return view('participantes', $data)->render();
 
     }
