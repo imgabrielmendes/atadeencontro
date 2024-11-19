@@ -11,7 +11,7 @@
         <h1><b>Formulário de Solicitação</b></h1>
       </div>
 
-      <div class="col-xl-4 col-lg-xl-3 col-md-6">
+      <div class="col-xl-3 col-lg-xl-3 col-md-6">
         <label><b>Data*</b></label>
         <input id="datainicio" class="mt-2 mb-2 form-control" placeholder="dd-mm-aaaa" type="date">
       </div>
@@ -19,14 +19,25 @@
           var hoje = new Date().toISOString().split('T')[0];
           document.getElementById("datainicio").setAttribute("min", hoje);
       </script>
-      <div class="col-xl-4 col-lg-xl-3 col-md-6">
+      <div class="col-xl-2 col-lg-xl-3 col-md-6">
         <label for="nomeMedico"><b>Horário de Início*:</b></label>
         <input class="mt-2 mb-2 form-control" type="time" id="horainicio" name="appt" max="18:00">
       </div>
-      <div class="col-xl-4 col-lg-xl-3 col-md-6">
+      <div class="col-xl-2 col-lg-xl-3 col-md-6">
         <label for="form-control"> <b> Horário de Término:</b> </label>
         <input class="mt-2 mb-2 form-control" type="time" id="horaterm" name="appt" min="13:00" max="12:00">
       </div>
+
+      <div class="col-xl-5">
+      <label for="form-control"> <b> Local:</b> </label>
+        <select class="form-control mt-2 mb-2" id="pegarlocal">
+          <option value="" disabled selected> Informe o Local </option>
+          @foreach($locais as $local)
+            <option value="{{$local->id}}">{{$local->nome}}</option>
+          @endforeach 
+        </select>
+      </div>
+      
     </div>
     <div class="row ">
       <div class="col mt-1" id="objetivo">
@@ -38,7 +49,7 @@
             <input type="radio" class="objetivo" name="objetivo" value="Reunião"> Reunião
           </label>
         </div>
-        <div class="col-xl-3 col-lg-xl-4 col-md-4 mt-2">
+        <div class="col-xl-2 col-lg-xl-2 col-md-3 mt-2">
           <label class="form-control">
             <input type="radio" class="objetivo" name="objetivo" value="Treinamento"> Treinamento
           </label>
@@ -47,14 +58,6 @@
           <label class="form-control">
             <input type="radio" class="objetivo" name="objetivo" value="Consulta"> Consulta
           </label>
-        </div>
-        <div class="col-xl-5 col-sm-12 mt-2">
-          <select class="form-control" id="pegarlocal">
-            <option value="" disabled selected> Informe o Local </option>
-            @foreach($locais as $local)
-              <option value="{{$local->id}}">{{$local->nome}}</option>
-            @endforeach 
-          </select>
         </div>
       </div>
       <div class="row">

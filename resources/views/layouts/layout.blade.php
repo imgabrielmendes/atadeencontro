@@ -21,44 +21,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.x.x/dist/tailwind.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a href="home">
-                <img src="images/Logo Hospital Rio Grande.png" class="logo2" alt="Hospital Rio Grande">
-            </a>
-            <div class="d-flex align-items-center">
-                <div class="dropdown me-2">
-                    <button class="entrar-navbar" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{-- <div>{{ Auth::user()->name }} <i class="bi bi-person-fill"></i></div> --}}
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="profile">Meus dados</a></li>
-                        <li><a class="dropdown-item" href="minhasestatisticas">Minhas estatísticas</a></li>
-                        {{-- @if (Auth::user()->isAdmin())
-                            <li><a class="dropdown-item" href="estatisticas-rh">Estatísticas RH</a></li>
-                            <li><a class="dropdown-item" href="aprovacaorh">Aprovação RH</a></li>
-                        @endif --}}
-                        {{-- <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#AjudaModal">Ajuda</a></li>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                        <li><a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a></li> --}}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
 
+    @include('assets/header')
+
+    <div class="container-fluid">
+    
     <main>
         @yield('content')
     </main>
 
-    <footer style="font-weight:normal">
-        <div class="text-center">
-            <div class="col-11">Copyright © 2024 <a href="http://www.hospitalriogrande.com.br/" target="_blank">Hospital Rio Grande</a>. Todos os direitos reservados. Versão 0.0.1</div>
-        </div>
-    </footer>
+    
+</div>
 
+@include('assets/footer')
     <!-- Modal -->
     <div class="modal fade" id="AjudaModal" tabindex="-1" aria-labelledby="AjudaModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
