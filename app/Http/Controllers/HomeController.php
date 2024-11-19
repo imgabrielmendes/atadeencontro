@@ -22,7 +22,7 @@ class HomeController extends Controller
             "locais" => $locais
         ];
     
-        return $usuarios;
+        // return $usuarios;
         return view('home', $data)->render();
     }
     
