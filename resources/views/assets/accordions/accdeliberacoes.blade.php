@@ -21,7 +21,6 @@
       <div class="form-group">
       <div class="col">
         
-            <br>
             <ul class="list-group list-group-flush"></ul>              
             <textarea id="deliberacoes" class="form-control item" placeholder="Informe as deliberações..." style="height: 85px;"></textarea>
           </div>
@@ -30,15 +29,7 @@
     <!-- Primeira caixa de texto e select de facilitadores -->
     <div class="mb-2">
       <label for="" class="mb-2">Deliberado para:</label>
-      <select id="deliberador" class="form-control facilitator-select" placeholder="Deliberações" multiple>
-      <optgroup label="Selecione Facilitadores">
-                @foreach($usuarios as $usuario)
-                    <option value="{{$usuario->id}}" data-tokens="{{$usuario->name}}">
-                        {{$usuario->name}}
-                    </option>
-                @endforeach
-      </optgroup>
-      </select>
+      @include("multiselect")
     </div>
       </div>
       <div class="col-12">

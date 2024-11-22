@@ -29,51 +29,44 @@ class HomeController extends Controller
 
     public function getParticipantesPage($id)
     {
-
         $usuarios = home::getAllUsers();
-
-        $atas = home::lastAtaforuser($id);
-        // return $atas;
-
-        $ata = $atas[0];
-
-        // return $ata;
-
-        $dataRegistro = new \DateTime($ata->data_solicitada);
-        $ata->data_solicitada_formatada = $dataRegistro->format('d/m/Y'); 
-
-        $data = [
-            "usuarios" => $usuarios,
-            "ata" => $ata
-        ];
-
-        // return $ata;
-
-        return view('participantes', $data)->render();
-
+        $atas = json_decode(json_encode(home::lastAtaforuser($id)));        
+        // dd($atas);
+    
+        foreach ($atas as $ata) {
+            if (!empty($ata->data_solicitada)) {
+                $dataRegistro = new \DateTime($ata->data_solicitada);
+                $ata->data_solicitada_formatada = $dataRegistro->format('d/m/Y');
+            }
+        }
+    
+        return view('participantes', [
+            'usuarios' => $usuarios,
+            'atas' => $atas,
+        ])->render();
     }
+    
 
     public function getDeliberacoesPage($id)
     {
-        $usuariosdaata = home::lastParticipantesforata($id);
-        // return $usuariosdaata;
+        $usuarios = home::getAllUsers();
+        $atas = json_decode(json_encode(home::lastAtaforuser($id)));
+        $participantes = home::lastParticipantesforata($id);
+        
 
-        $atas = home::lastAtaforuser($id);
-        // return $atas;
+        foreach ($atas as $ata) {
+            if (!empty($ata->data_solicitada)) {
+                $dataRegistro = new \DateTime($ata->data_solicitada);
+                $ata->data_solicitada_formatada = $dataRegistro->format('d/m/Y');
+            }
+        }
+    
+        return view('deliberacoes', [
+            'usuarios' => $usuarios,
+            'atas' => $atas,
+            'participantes' => $participantes
+        ])->render();
 
-        $ata = $atas[0];
-
-        // return $ata;
-
-        $dataRegistro = new \DateTime($ata->data_solicitada);
-        $ata->data_solicitada_formatada = $dataRegistro->format('d/m/Y'); 
-
-        $data = [
-            "usuarios" => $usuariosdaata,
-            "ata" => $ata
-        ];
-
-        return view('deliberacoes', $data)->render();
     }
 
     public function getHistoricoPage()

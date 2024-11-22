@@ -21,7 +21,6 @@
 </div>
 </div>
 
-{{-- ACCORDION dos participantes adicionados --}}
 @include('assets.accordions.accparticipante_adicionados')
     
 </div>     

@@ -16,13 +16,13 @@ Route::get('/home', [HomeController::class, 'getHome'])->middleware(['auth', 've
 Route::get('/participantes', [HomeController::class, 'participantes'])->middleware(['auth', 'verified']);
 
 Route::post('/registrarata', [inserts::class, 'insertAta'])->middleware(['auth', 'verified']);
-Route::post('/registrarparticipantes', [inserts::class, 'insertParticipantes']);
-Route::post('/registrartexto', [inserts::class, 'insertTextoPrincipal']);
+Route::post('/registrarparticipantes', [inserts::class, 'insertParticipantes'])->middleware(['auth', 'verified']);
+Route::post('/registrartexto', [inserts::class, 'insertTextoPrincipal'])->middleware(['auth', 'verified']);
 
-Route::get('/ata/{id}', [HomeController::class, 'getParticipantesPage']);
-Route::get('/ata/deliberacoes/{id}', [HomeController::class, 'getDeliberacoesPage']);
+Route::get('/ata/{id}', [HomeController::class, 'getParticipantesPage'])->middleware(['auth', 'verified'])->middleware(['auth', 'verified']);
+Route::get('/ata/deliberacoes/{id}', [HomeController::class, 'getDeliberacoesPage'])->middleware(['auth', 'verified']);
 
-Route::get('/historico', [HomeController::class, 'getHistoricoPage']);
+Route::get('/historico', [HomeController::class, 'getHistoricoPage'])->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
     return redirect('/home');
