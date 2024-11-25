@@ -19,10 +19,10 @@
         <div class="row">
             <div class="col">
                 <div>
-                    <div style="margin: 3px" class='border rounded'>
+                    <div>
                         <div class="row">
                             @foreach ($participantes as $usuario)
-                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 mb-3">
+                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
                                     <div class="card overflow-hidden">
                                         <div class="card-content">
                                             <div class="card-body clearfix">

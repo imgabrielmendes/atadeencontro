@@ -31,7 +31,6 @@ class HomeController extends Controller
     {
         $usuarios = home::getAllUsers();
         $atas = json_decode(json_encode(home::lastAtaforuser($id)));        
-        // dd($atas);
     
         foreach ($atas as $ata) {
             if (!empty($ata->data_solicitada)) {
@@ -49,25 +48,26 @@ class HomeController extends Controller
 
     public function getDeliberacoesPage($id)
     {
-        $usuarios = home::getAllUsers();
-        $atas = json_decode(json_encode(home::lastAtaforuser($id)));
-        $participantes = home::lastParticipantesforata($id);
-        
-
-        foreach ($atas as $ata) {
+        $atas = collect(home::lastAtaforuser($id));
+        $participantes = collect(home::lastParticipantesforata($id));
+    
+        $usuarios = $atas->merge($participantes);
+    
+        $atas = $atas->map(function ($ata) {
             if (!empty($ata->data_solicitada)) {
-                $dataRegistro = new \DateTime($ata->data_solicitada);
-                $ata->data_solicitada_formatada = $dataRegistro->format('d/m/Y');
+                $ata->data_solicitada_formatada = (new \DateTime($ata->data_solicitada))->format('d/m/Y');
             }
-        }
+            
+            return $ata;
+        });
     
         return view('deliberacoes', [
             'usuarios' => $usuarios,
             'atas' => $atas,
-            'participantes' => $participantes
-        ])->render();
-
+            'participantes' => $participantes,
+        ]);
     }
+    
 
     public function getHistoricoPage()
     {

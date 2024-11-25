@@ -9,46 +9,71 @@ function mostrarAlerta(titulo, mensagem, icone) {
 document.addEventListener("DOMContentLoaded", function() {
     var textoprincipal = document.getElementById('btntextoregistrar');
     textoprincipal.addEventListener('click', function() {
-        registrartexto();
+        registrarTexto();
     });
 });
 
-function registrartexto() {
-    console.log("Ok, a função de registrar texto foi puxada");
-
-    var caixadetexto = document.getElementById("caixadetexto").value;
-
+function registrarTexto() {
+    var caixadetexto = document.getElementById("caixadetexto").value.trim();
     var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
     var urlParts = window.location.pathname.split('/');
     var ataId = urlParts[urlParts.length - 1];
 
-    if (caixadetexto === "") {
+    if (!caixadetexto) {
         mostrarAlerta("Problema!", "Você não informou um texto principal", "error");
-    } 
-        // else if (deliberadoresSelecionadosLabel.length === 0) {
-        // mostrarAlerta("Problema!", "Preencha o espaço de deliberações", "error");} 
-        
-        else {
-        mostrarAlerta("Perfeito!", "Seus Deliberadores foram registrados", "success");
-
-        $.ajax({
-            url: '/registrartexto',
-            method: 'POST',
-            data: {
-                caixadetexto: caixadetexto,
-                id_ata: ataId,
-                _token: token
-            },
-            success: function() {
-                
-                console.log("AJAX DO TEXTO FOI PUXADO");
-
-                setTimeout(function() {
-                    // var url = 'paghistorico.php';
-                    // window.location.href = url;
-                }, 1500);
-            }
-        });
+        return;
     }
+
+    $.ajax({
+        url: '/registrartexto',
+        method: 'POST',
+        data: {
+            caixadetexto: caixadetexto,
+            id_ata: ataId,
+            _token: token
+        },
+        success: function(response) {
+            if (response.success) {
+
+                Swal.fire({
+                    title: "Sucesso!",
+                    text: "Texto principal registrado com sucesso",
+                    icon: "success",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Atenção!",
+                            text: "Deseja realmente continuar com a ata?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Continuar",
+                            cancelButtonText: "Finalizar ata"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Ação caso o usuário confirme
+                                console.log("Usuário escolheu continuar.");
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                // Ação caso o usuário cancele
+                                console.log("Usuário escolheu cancelar.");
+                                window.location.href = `/historico`;
+                            }
+                        });
+                    }
+                });
+                
+
+            } else {
+                mostrarAlerta("Erro!", response.message || "Falha ao registrar o texto", "error");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Erro na solicitação AJAX:', error);
+            console.error('Response:', xhr.responseText);
+            mostrarAlerta("Erro!", "Ocorreu um erro ao registrar o texto", "error");
+        }
+    });
 }

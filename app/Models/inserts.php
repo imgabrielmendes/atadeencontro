@@ -26,7 +26,8 @@ class inserts extends Model
         'hora_termino' => $request->horat,
         'objetivo' => $request->objetivos,
         'local' => $request->local,
-        'tema' => $request->tema
+        'tema' => $request->tema,
+        'status' => 1
     ];
 
     $id = DB::connection('mysql_other')->table('atareu.assunto')->insertGetId($dados);
@@ -67,60 +68,80 @@ class inserts extends Model
      * Método responsável em enviar o ID dos participantes da ata para o DB
      */
     public function insertParticipantes(Request $request)
-    {
+{
+    Log::info('Dados recebidos:', $request->all());
 
-        Log::info('Dados recebidos:', $request->all());
+    $id_ata = $request->input('id_ata');
+    $participantes = $request->participantes;
 
-        $id_ata = $request->input('id_ata');
-        $participantes = $request->participantes;
-
-        // return $participantes
-
-        // $dados = [
-        //     'id_ata' => $id_ata,
-        //     'participantes' => $part,
-        // ];
-
-        $dados = [];
-        foreach ($participantes as $part) {
-
-            $dados = [
-                'id_ata' => $id_ata,
-                'participantes' => $part,
-            ];
-
-        }
-
-        try {
-
-            DB::connection('mysql_other')->table('atareu.participantes')->insert($dados);
-
-            return response()->json(['success' => true, 'message' => 'Ata e facilitadores registrados com sucesso!', 'id' => $id_ata]);
-
-        } catch (\Exception $e) {
-            Log::error('Erro ao inserir facilitadores:', ['error' => $e->getMessage()]);
-
-            return response()->json(['success' => true, 'message' => 'Participantes registrados com sucesso!', 'id' => $id_ata]);
-        }
-
+    if (empty($participantes) || !is_array($participantes)) {
+        return response()->json(['success' => false, 'message' => 'Nenhum participante foi informado.']);
     }
 
-    public function insertTextoPrincipal(Request $request)
-    {
+    $dados = [];
+    foreach ($participantes as $part) {
+        $dados[] = [
+            'id_ata' => $id_ata,
+            'participantes' => $part,
+        ];
+    }
 
-        Log::info('TEXTO PRINCIPAL recebidos:', $request->all());
+    try {
+        // Inserir todos os dados de uma vez
+        DB::connection('mysql_other')->table('atareu.participantes')->insert($dados);
 
-        $id_ata = $request->input('id_ata');
-        $textoprincipal = $request->input('caixadetexto');
+        return response()->json([
+            'success' => true,
+            'message' => 'Ata e facilitadores registrados com sucesso!',
+            'id' => $id_ata
+        ]);
 
+    } catch (\Exception $e) {
+        Log::error('Erro ao inserir participantes:', ['error' => $e->getMessage()]);
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Erro ao registrar os participantes. Tente novamente mais tarde.',
+        ]);
+    }
+}
+
+
+
+public function insertTextoPrincipal(Request $request)
+{
+    Log::info('Dados recebidos para o texto principal:', $request->all());
+
+    $validatedData = $request->validate([
+        'id_ata' => 'required|integer',
+        'caixadetexto' => 'required|string|max:255',
+    ]);
+
+    $id_ata = $validatedData['id_ata'];
+    $textoPrincipal = $validatedData['caixadetexto'];
+
+    try {
         $dados = [
             'id_ata' => $id_ata,
-            'texto_princ' => $textoprincipal,
+            'texto_princ' => $textoPrincipal,
         ];
 
         $id = DB::connection('mysql_other')->table('atareu.textoprinc')->insertGetId($dados);
-        return response()->json(['success' => true, 'message' => 'Participantes registrados com sucesso!', 'id' => $id_ata]);
 
+        return response()->json([
+            'success' => true,
+            'message' => 'Texto principal registrado com sucesso!',
+            'id' => $id
+        ]);
+    } catch (\Exception $e) {
+        Log::error('Erro ao registrar texto principal:', ['error' => $e->getMessage()]);
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Erro ao registrar o texto principal. Tente novamente mais tarde.'
+        ], 500);
     }
+}
+
     
 }

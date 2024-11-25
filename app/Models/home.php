@@ -49,6 +49,7 @@ class home extends Model
                 INNER JOIN atareu.assunto as ass ON ass.id = ahf.id_ata
                 INNER JOIN l_breeze.users as usu ON usu.id = ahf.facilitadores
             WHERE ahf.id_ata = ?
+            order by usu.name asc
         ";
     
         $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
@@ -59,13 +60,17 @@ class home extends Model
     {
         $query = "
         SELECT 
-        ahf.id_ata,
-        us.* 
+        part.id_ata,
+        part.participantes,
+        us.name
 
-        FROM atareu.ata_has_fac as ahf
+        FROM 
+        atareu.participantes as part
             INNER JOIN l_breeze.users as us
-                ON us.id = ahf.facilitadores
-                where ahf.id_ata = ?
+                ON us.id = part.participantes
+                
+                where part.id_ata = ?
+                order by us.name asc
         ";
 
         $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
@@ -103,8 +108,7 @@ class home extends Model
                 ON us.id = ahf.facilitadores
                 
                 where ahf.facilitadores = ?
-                
-                ;
+                order by us.name asc
         ";
 
         $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);

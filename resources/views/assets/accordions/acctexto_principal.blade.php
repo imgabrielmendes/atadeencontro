@@ -1,4 +1,5 @@
 <div class="accordion mt-4">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="accordion-item shadow">
     <h2 class="accordion-header">
     <div class="accordion-button shadow-sm text-white" style="background-color: #66bb6a;">
