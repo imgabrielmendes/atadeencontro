@@ -9,7 +9,7 @@
     
 
     <div class="collapse navbar-collapse" id="navBarCentral">
-        <a class="nav-link active" aria-current="page" href="/home">Home</a>
+        <a class="nav-link active px-4" aria-current="page" href="/home">Home</a>
         <a class="nav-link" href="/historico">Histórico</a>
     </div>
   </div>

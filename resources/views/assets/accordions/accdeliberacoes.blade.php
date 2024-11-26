@@ -15,17 +15,44 @@
     <div class="col-md-12 text-center">               
     </div>
     
-    <span class="col d-flex align-items-end flex-column" id="inputContainer"></span>
-    
-      <form id="addForm">
-      <div class="form-group">
-      <div class="col">
+    @foreach ($deliberacoes as $delib)
+        <div class="card overflow-hidden">
+            <div class="card-content">
+                <div class="card-body clearfix">
+                    <div class="media align-items-stretch">
+                        <div class="text-start media-body align-self-center">
+                            <!-- Exibe o texto (deliberação) -->
+                            <h4 class="text-primary">Deliberação:</h4>
+                            <p class="mb-2">{{ $delib['deliberacoes'] }}</p>
+
+                            <!-- Exibe os usuários associados ao texto -->
+                            <h4 class="text-secondary">Deliberados:</h4>
+                            <ul class="list-unstyled">
+                                @foreach ($delib['users'] as $user)
+                                    <li>
+                                        <i class="icon-user success"></i> {{ $user }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+@endforeach
+</div>   
+
+    <form id="addForm">
+    <div class="form-group">
+    <div class="col">
         
             <ul class="list-group list-group-flush"></ul>              
             <textarea id="deliberacoes" class="form-control item" placeholder="Informe as deliberações..." style="height: 85px;"></textarea>
           </div>
     
     <div class="col">
+
     <!-- Primeira caixa de texto e select de facilitadores -->
     <div class="mb-2">
       <label for="" class="mb-2">Deliberado para:</label>

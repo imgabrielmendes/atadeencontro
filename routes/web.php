@@ -24,6 +24,8 @@ Route::post('/registrartexto', [Inserts::class, 'insertTextoPrincipal'])->middle
 Route::get('/ata/{id}', [HomeController::class, 'getParticipantesPage'])->middleware(['auth', 'verified'])->middleware(['auth', 'verified']);
 Route::get('/ata/deliberacoes/{id}', [HomeController::class, 'getDeliberacoesPage'])->middleware(['auth', 'verified']);
 
+Route::post('/registrardeliberacao', [Inserts::class, 'insertDeliberacoes'])->middleware(['auth', 'verified']);
+
 Route::get('/historico', [HomeController::class, 'getHistoricoPage'])->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {

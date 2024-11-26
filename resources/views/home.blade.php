@@ -7,22 +7,31 @@
   <div class="form-group col-8 mt-5">
     <div class="row">
 
+      <div class="position-relative top-0 start-50 translate-middle-x m-4">
+        <div class="progress" role="progressbar" aria-label="Progress" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="height: 1px;">
+          <div class="progress-bar" style="width: 50%"></div>
+        </div>
+        <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 1rem; height:1rem;"></button>
+        <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 1rem; height:1rem;"></button>
+        <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 1rem; height:1rem;"></button>
+        <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 1rem; height:1rem;"></button>
+        <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 1rem; height:1rem;"></button>
+      </div>
+
       <div class="col-md-12 text-center mb-4 m-3 p-2">
         <p class="fs-1"><b> Formulário de Solicitação </b></p>
       </div>
 
-      <div class="col-xl-3 col-lg-xl-3 col-md-6">
+      <div class="col-xl-2 col-lg-xl-2 col-md-6">
         <label><b>Data*</b></label>
         <input id="datainicio" class="mt-2 mb-2 form-control" placeholder="dd-mm-aaaa" type="date">
       </div>
-      <script>
-          var hoje = new Date().toISOString().split('T')[0];
-          document.getElementById("datainicio").setAttribute("min", hoje);
-      </script>
+
       <div class="col-xl-2 col-lg-xl-3 col-md-6">
         <label for="nomeMedico"><b>Horário de Início*:</b></label>
         <input class="mt-2 mb-2 form-control" type="time" id="horainicio" name="appt" max="18:00">
       </div>
+      
       <div class="col-xl-2 col-lg-xl-3 col-md-6">
         <label for="form-control"> <b> Horário de Término:</b> </label>
         <input class="mt-2 mb-2 form-control" type="time" id="horaterm" name="appt" min="13:00" max="12:00">

@@ -115,6 +115,24 @@ class home extends Model
         return $dadosMySql;
 
     }
+
+    public static function deliberacoesEdeliberadores($dados)
+    {
+        $query = "
+        SELECT 
+        del.id,
+        del.id_ata,
+        us.name ,
+        del.deliberacoes
+        FROM atareu.deliberacoes as del
+            INNER JOIN l_breeze.users as us
+                ON us.id = del.deliberadores
+                where del.id_ata = ?
+        ";
+
+        $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
+        return $dadosMySql;
+    }
     
 
 

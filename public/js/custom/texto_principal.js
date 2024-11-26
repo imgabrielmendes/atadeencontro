@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function registrarTexto() {
     var caixadetexto = document.getElementById("caixadetexto").value.trim();
     var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    
     var urlParts = window.location.pathname.split('/');
     var ataId = urlParts[urlParts.length - 1];
 

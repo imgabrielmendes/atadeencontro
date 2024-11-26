@@ -143,5 +143,48 @@ public function insertTextoPrincipal(Request $request)
     }
 }
 
+public function insertDeliberacoes(Request $request){
+
+    log::info("Deliberacoes recebidas:" , $request->all());
+
+    $validatedData = $request->validate([
+        'id_ata' => 'required|integer',
+        'deliberacao' => 'required',
+        'participantes' => 'required',
+    ]);
+
+    $id_ata = $validatedData['id_ata'];
+    $deliberacao = $validatedData['deliberacao'];
+    $participantes = $validatedData['participantes'];
+
+    $dados = [];
+    foreach ($participantes as $part) {
+        $dados[] = [
+            'id_ata' => $id_ata,
+            'deliberadores' => $part,
+            'deliberacoes' => $deliberacao,
+        ];
+    }
+
+    try {
+        DB::connection('mysql_other')->table('atareu.deliberacoes')->insert($dados);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Deliberacoes registradas com sucesso!',
+            'id' => $id_ata
+        ]);
+
+    } catch (\Exception $e) {
+        Log::error('Erro ao inserir a deliberacao:', ['error' => $e->getMessage()]);
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Erro ao registrar os participantes. Tente novamente mais tarde.',
+        ]);
+    }
+
+}
+
     
 }
