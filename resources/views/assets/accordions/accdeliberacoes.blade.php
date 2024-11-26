@@ -11,37 +11,39 @@
     <!-----------------------------4° FASE-------------------------------->
     
     <div class="accordion-collapse collapse show">
-    <div class="accordion-body" style="background-color: rgba(240, 240, 240, 0.41);">
-    <div class="col-md-12 text-center">               
-    </div>
+        <div class="accordion-body" style="background-color: rgba(240, 240, 240, 0.41);">
+            <div class="row">
+                @foreach ($deliberacoes as $delib)
+                    <div class="col-md-6 mb-2">
+                        <div class="card overflow-hidden">
+                            <div class="card-content">
+                                <div class="card-body clearfix">
+                                    <div class="media align-items-stretch">
+                                        <div class="text-start media-body align-self-center">
+                                            <!-- Exibe o texto (deliberação) -->
+                                            <h4 class="text-primary">Deliberação:</h4>
+                                            <p class="mb-2">{{ $delib['deliberacoes'] }}</p>
     
-    @foreach ($deliberacoes as $delib)
-        <div class="card overflow-hidden">
-            <div class="card-content">
-                <div class="card-body clearfix">
-                    <div class="media align-items-stretch">
-                        <div class="text-start media-body align-self-center">
-                            <!-- Exibe o texto (deliberação) -->
-                            <h4 class="text-primary">Deliberação:</h4>
-                            <p class="mb-2">{{ $delib['deliberacoes'] }}</p>
-
-                            <!-- Exibe os usuários associados ao texto -->
-                            <h4 class="text-secondary">Deliberados:</h4>
-                            <ul class="list-unstyled">
-                                @foreach ($delib['users'] as $user)
-                                    <li>
-                                        <i class="icon-user success"></i> {{ $user }}
-                                    </li>
-                                @endforeach
-                            </ul>
+                                            <!-- Exibe os usuários associados ao texto -->
+                                            <h4 class="text-secondary">Deliberados:</h4>
+                                            <ul class="list-unstyled">
+                                                @foreach ($delib['users'] as $user)
+                                                    <li>
+                                                        <i class="icon-user success"></i> {{ $user }}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
-
-@endforeach
-</div>   
+    </div>
+    
 
     <form id="addForm">
     <div class="form-group">
@@ -59,54 +61,19 @@
       @include("multiselect")
     </div>
       </div>
+
       <div class="col-12">
         <ul id="caixadeselecaodel"></ul>
-    <div class="col d-flex justify-content-center align-content-center">
+    {{-- <div class="col d-flex justify-content-center align-content-center">
     
     <button type="button" id="addItemButton" class="btn btn-success  a">Criar deliberações</button>
-    </div>
+    </div> --}}
     </div>
     
     </div>
-    <div class=" col d-flex justify-content-center align-content-center">
+
+    <div class=" col d-flex justify-content-center align-content-center mb-3">
         <button id="finalizarAtaBtn" type="button" class="btn btn-secondary" data-bs-toggle="modal">Finalizar Encontro</button>
+        <button type="button" id="addItemButton" class="btn btn-success  a">Criar deliberações</button>
+
     </div>
-
-    <script>  
-        document.getElementById("finalizarAtaBtn").addEventListener("click", function() {
-        Swal.fire({
-          title: "Finalizada!",
-          text: "Você finalizou seu encontro com sucesso!",
-          icon: "success",
-          confirmButtonText: "OK"
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = `/ata/historico`;
-          }
-        });
-        });
-    </script>
-
-    <script>
-        // document.addEventListener('DOMContentLoaded', function() {
-        //   var botaocont = document.getElementById('botaocontinuarata');
-        //   var itemList = document.getElementById('items');
-        //   var filter = document.getElementById('filter');
-        //   var addItemButton = document.getElementById('addItemButton'); 
-        
-        // });
-        
-    </script>
-
-    <script>
-        function excluirParticipante(participante) {
-            if (confirm("Tem certeza de que deseja excluir o participante '" + participante + "'?")) {
-            var participanteElement = document.querySelector("li:contains('" + participante + "')");
-            if (participanteElement) {
-            participanteElement.remove();
-                } else {
-                alert("Participante não encontrado na lista.");
-                }
-            }
-        }
-    </script>

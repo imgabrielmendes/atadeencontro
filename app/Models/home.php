@@ -44,10 +44,13 @@ class home extends Model
     {
         $query = "
             SELECT *,
-                usu.name as nome
+                usu.name as nome,
+                sis.nome as local
             FROM atareu.ata_has_fac as ahf
                 INNER JOIN atareu.assunto as ass ON ass.id = ahf.id_ata
                 INNER JOIN l_breeze.users as usu ON usu.id = ahf.facilitadores
+                INNER JOIN hrg_centralservicos.sistema as sis ON sis.id = ass.local
+                
             WHERE ahf.id_ata = ?
             order by usu.name asc
         ";
