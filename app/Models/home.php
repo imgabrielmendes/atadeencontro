@@ -143,22 +143,22 @@ class home extends Model
 
     public static function finalizarAta(Request $request)
     {
-
-    log::info("ATA FINALIZADA" , $request->all());
-
-    // $assunto = self::on('mysql_other')->find($id);
-
-    // if (!$assunto) {
-    //     return false;
-    // }
-
-    // $assunto->status = '2'; 
-
-    // $assunto->save();
-
-    // return true;
-
+        Log::info("ATA FINALIZADA", $request->all());
+    
+        $validatedData = $request->validate([
+            'id_ata' => 'required|integer'
+        ]);
+    
+        $id_ata = $validatedData['id_ata'];
+    
+        $updated = DB::connection('mysql_other')
+            ->table('atareu.assunto') 
+            ->where('id', $id_ata)   
+            ->update(['status' => '2']);
+    
+        return $updated > 0;
     }
+    
     
 
 

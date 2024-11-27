@@ -11,20 +11,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
         var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        // $.ajax({
-        //     url: '/finalizarAta',
-        //     method: 'POST',
-        //     data: {
-        //         id_ata: ataId, 
-        //         _token: token
-        //     },
-        //     success: function(response) {
-        //         console.log(response);
-        //     },
-        //     error: function(xhr, status, error) {
-        //         console.error('Erro na solicitação AJAX:', error);
-        //         console.error('Response:', xhr.responseText);
-        //     }
-        // });
+        $.ajax({
+            url: '/finalizarata',
+            method: 'POST',
+            data: {
+                id_ata: ataId, 
+                _token: token
+            },
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro na solicitação AJAX:', error);
+                console.error('Response:', xhr.responseText);
+
+                console.log(ataId);
+
+            }
+        });
     }
 });

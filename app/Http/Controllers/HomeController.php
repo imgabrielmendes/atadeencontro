@@ -82,7 +82,6 @@ class HomeController extends Controller
             return $ata;
         });
     
-        // Unificar estrutura de usuários
         $usuarios = $atas->map(function ($ata) {
             return [
                 'id' => $ata->facilitadores,
@@ -95,7 +94,6 @@ class HomeController extends Controller
             ];
         }));
     
-        // Retorna todas as variáveis para a view
         return view('deliberacoes', [
             // INFORMAÇÕES DE REGISTRO
             'atas' => $atas,
