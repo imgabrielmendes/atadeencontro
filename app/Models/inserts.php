@@ -38,16 +38,13 @@ class inserts extends Model
 
         $dadosFacilitadores = [];
         foreach ($facilitadores as $facilitadorId) {
-
             $dadosFacilitadores[] = [
                 'id_ata' => $id,
                 'facilitadores' => $facilitadorId
             ];
-
         }
 
         try {
-
             DB::connection('mysql_other')->table('atareu.ata_has_fac')->insert($dadosFacilitadores);
 
             return response()->json(['success' => true, 'message' => 'Ata e facilitadores registrados com sucesso!', 'id' => $id]);
@@ -60,9 +57,7 @@ class inserts extends Model
     } else {
         return response()->json(['success' => false, 'message' => 'Falha ao registrar a ata.'], 500);
     }
-}
-
-    
+}   
     /**
      * 
      * Método responsável em enviar o ID dos participantes da ata para o DB
@@ -184,7 +179,5 @@ public function insertDeliberacoes(Request $request){
         ]);
     }
 
-}
-
-    
+}    
 }

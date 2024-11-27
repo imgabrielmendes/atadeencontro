@@ -23,13 +23,15 @@
                                             <!-- Exibe o texto (deliberação) -->
                                             <h4 class="text-primary">Deliberação:</h4>
                                             <p class="mb-2">{{ $delib['deliberacoes'] }}</p>
-    
+        
                                             <!-- Exibe os usuários associados ao texto -->
                                             <h4 class="text-secondary">Deliberados:</h4>
                                             <ul class="list-unstyled">
                                                 @foreach ($delib['users'] as $user)
                                                     <li>
-                                                        <i class="icon-user success"></i> {{ $user }}
+                                                        <i class="icon-user success"></i> 
+                                                        <strong></strong> {{ $user->name }} <br>
+                                                        {{-- <strong>M:</strong> {{ $user->email }} --}}
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -43,6 +45,7 @@
             </div>
         </div>
     </div>
+    
     
 
     <form id="addForm">
@@ -73,7 +76,6 @@
     </div>
 
     <div class=" col d-flex justify-content-center align-content-center mb-3">
-        <button id="finalizarAtaBtn" type="button" class="btn btn-secondary" data-bs-toggle="modal">Finalizar Encontro</button>
+        <button id="btnfinalizar" type="button" class="btn btn-secondary" data-bs-toggle="modal">Finalizar Encontro</button>
         <button type="button" id="addItemButton" class="btn btn-success  a">Criar deliberações</button>
-
     </div>

@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Log;
+
 
 class home extends Model
 {
@@ -135,6 +139,25 @@ class home extends Model
 
         $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
         return $dadosMySql;
+    }
+
+    public static function finalizarAta(Request $request)
+    {
+
+    log::info("ATA FINALIZADA" , $request->all());
+
+    // $assunto = self::on('mysql_other')->find($id);
+
+    // if (!$assunto) {
+    //     return false;
+    // }
+
+    // $assunto->status = '2'; 
+
+    // $assunto->save();
+
+    // return true;
+
     }
     
 

@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                 mostrarAlerta("Problema!", "Você não informou um texto principal", "success");
 
-                location.reload();
+                // location.reload();
 
             },
             error: function(xhr, status, error) {

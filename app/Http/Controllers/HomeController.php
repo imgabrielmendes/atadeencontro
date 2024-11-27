@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\home;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -48,15 +50,14 @@ class HomeController extends Controller
 
     public function getDeliberacoesPage($id)
     {
-        // Obtém os dados brutos
         $atas = collect(home::lastAtaforuser($id));
         $participantes = collect(home::lastParticipantesforata($id));
         $deliberacoes_raw = collect(home::deliberacoesEdeliberadores($id));
     
-        // Formata as deliberações agrupando usuários pelo texto
         $deliberacoes = $deliberacoes_raw->reduce(function ($result, $item) {
             $texto = $item->deliberacoes;
-            $usuario = $item->name;
+    
+            $usuario = DB::table('users')->where('name', $item->name)->first();
     
             if (!isset($result[$texto])) {
                 $result[$texto] = [
@@ -72,32 +73,42 @@ class HomeController extends Controller
             return $result;
         }, []);
     
-        // Converte para lista numérica
         $deliberacoes = array_values($deliberacoes);
-        // return $deliberacoes;
     
-        // Processa formatação de atas (mantendo lógica original)
         $atas = $atas->map(function ($ata) {
             if (!empty($ata->data_solicitada)) {
                 $ata->data_solicitada_formatada = (new \DateTime($ata->data_solicitada))->format('d/m/Y');
             }
-    
             return $ata;
         });
     
-        // Junta atas e participantes (mantendo lógica original)
-        $usuarios = $atas->merge($participantes);
+        // Unificar estrutura de usuários
+        $usuarios = $atas->map(function ($ata) {
+            return [
+                'id' => $ata->facilitadores,
+                'name' => $ata->name,
+            ];
+        })->merge($participantes->map(function ($participante) {
+            return [
+                'id' => $participante->participantes,
+                'name' => $participante->name,
+            ];
+        }));
     
         // Retorna todas as variáveis para a view
         return view('deliberacoes', [
-            'usuarios' => $usuarios,
+            // INFORMAÇÕES DE REGISTRO
             'atas' => $atas,
+            // PARTICIPANTES ADICIONADOS
             'participantes' => $participantes,
             'deliberacoes' => $deliberacoes,
+            // BOX DE MULTISELECT
+            'usuarios' => $usuarios,
         ]);
     }
     
-    
+
+
 
     public function getHistoricoPage()
     {

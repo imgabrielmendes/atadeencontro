@@ -12,5 +12,11 @@
         <a class="nav-link active px-4" aria-current="page" href="/home">Home</a>
         <a class="nav-link" href="/historico">Histórico</a>
     </div>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+    <li><a class="dropdown-item" href="#"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
+    </li>
   </div>
 </nav>

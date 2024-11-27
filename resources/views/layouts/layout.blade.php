@@ -63,6 +63,8 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+
+    <script src="{{ asset('js/custom/finalizar_ata.js') }}" defer></script>
     <script src="{{ asset('js/custom/deliberacoes.js') }}" defer></script>
     <script src="{{ asset('js/custom/registrar_ata.js') }}" defer></script>
     <script src="{{ asset('js/custom/registrarparticipantes.js') }}"></script>

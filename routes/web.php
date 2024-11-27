@@ -26,6 +26,8 @@ Route::get('/ata/deliberacoes/{id}', [HomeController::class, 'getDeliberacoesPag
 
 Route::post('/registrardeliberacao', [Inserts::class, 'insertDeliberacoes'])->middleware(['auth', 'verified']);
 
+Route::post('/finalizarata', [home::class, 'finalizarAta'])->middleware(['auth', 'verified']);
+
 Route::get('/historico', [HomeController::class, 'getHistoricoPage'])->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
