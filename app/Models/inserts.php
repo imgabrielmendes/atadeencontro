@@ -126,8 +126,10 @@ public function insertTextoPrincipal(Request $request)
         return response()->json([
             'success' => true,
             'message' => 'Texto principal registrado com sucesso!',
+            'textoprincipal' => $textoPrincipal,
             'id' => $id
         ]);
+        
     } catch (\Exception $e) {
         Log::error('Erro ao registrar texto principal:', ['error' => $e->getMessage()]);
 

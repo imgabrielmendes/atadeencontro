@@ -1,10 +1,3 @@
-function mostrarAlerta(titulo, mensagem, icone) {
-    Swal.fire({
-        title: titulo,
-        text: mensagem,
-        icon: icone
-    });
-}
 
 document.addEventListener("DOMContentLoaded", function() {
     var textoprincipal = document.getElementById('btntextoregistrar');
@@ -35,6 +28,8 @@ function registrarTexto() {
         },
         success: function(response) {
             if (response.success) {
+
+                document.getElementById("caixadetexto").value = response.caixadetexto;
 
                 Swal.fire({
                     title: "Sucesso!",

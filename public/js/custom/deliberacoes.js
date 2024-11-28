@@ -1,10 +1,3 @@
-function mostrarAlerta(titulo, mensagem, icone) {
-    Swal.fire({
-        title: titulo,
-        text: mensagem,
-        icon: icone
-    });
-}
 
 document.addEventListener("DOMContentLoaded", function() {
     var btndeliberacao = document.getElementById("addItemButton");
