@@ -6,6 +6,8 @@ use App\Models\home;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 
 
 class HomeController extends Controller
@@ -49,64 +51,61 @@ class HomeController extends Controller
     
 
     public function getDeliberacoesPage($id)
-    {
-        $atas = collect(home::lastAtaforuser($id));
-        $participantes = collect(home::lastParticipantesforata($id));
-        $deliberacoes_raw = collect(home::deliberacoesEdeliberadores($id));
-    
-        $deliberacoes = $deliberacoes_raw->reduce(function ($result, $item) {
-            $texto = $item->deliberacoes;
-    
-            $usuario = DB::table('users')->where('name', $item->name)->first();
-    
-            if (!isset($result[$texto])) {
-                $result[$texto] = [
-                    'deliberacoes' => $texto,
-                    'users' => [],
-                ];
-            }
-    
-            if (!in_array($usuario, $result[$texto]['users'])) {
-                $result[$texto]['users'][] = $usuario;
-            }
-    
+{
+    $atas = collect(home::lastAtaforuser($id));
+    $participantes = collect(home::lastParticipantesforata($id));
+    $deliberacoes_raw = collect(home::deliberacoesEdeliberadores($id));
+
+    $deliberacoes = $deliberacoes_raw->reduce(function ($result, $item) {
+        $texto = $item->deliberacoes;
+        $usuario = DB::table('users')->where('name', $item->name)->first();
+
+        if (!$usuario) {
             return $result;
-        }, []);
-    
-        $deliberacoes = array_values($deliberacoes);
-    
-        $atas = $atas->map(function ($ata) {
-            if (!empty($ata->data_solicitada)) {
-                $ata->data_solicitada_formatada = (new \DateTime($ata->data_solicitada))->format('d/m/Y');
-            }
-            return $ata;
-        });
-    
-        $usuarios = $atas->map(function ($ata) {
-            return [
-                'id' => $ata->facilitadores,
-                'name' => $ata->name,
-            ];
-        })->merge($participantes->map(function ($participante) {
-            return [
-                'id' => $participante->participantes,
-                'name' => $participante->name,
-            ];
-        }));
-    
-        return view('deliberacoes', [
-            // INFORMAÇÕES DE REGISTRO
-            'atas' => $atas,
-            // PARTICIPANTES ADICIONADOS
-            'participantes' => $participantes,
-            'deliberacoes' => $deliberacoes,
-            // BOX DE MULTISELECT
-            'usuarios' => $usuarios,
-        ]);
-    }
-    
+        }
 
+        if (!isset($result[$texto])) {
+            $result[$texto] = [
+                'deliberacoes' => $texto,
+                'users' => [],
+            ];
+        }
 
+        if (!in_array($usuario, $result[$texto]['users'])) {
+            $result[$texto]['users'][] = $usuario;
+        }
+
+        return $result;
+    }, []);
+
+    $deliberacoes = array_values($deliberacoes);
+
+    $atas = $atas->map(function ($ata) {
+        if (!empty($ata->data_solicitada)) {
+            $ata->data_solicitada_formatada = (new \DateTime($ata->data_solicitada))->format('d/m/Y');
+        }
+        return $ata;
+    });
+
+    $usuarios = $atas->map(function ($ata) {
+        return [
+            'id' => $ata->facilitadores ?? null,
+            'name' => $ata->name ?? 'Sem Nome',
+        ];
+    })->merge($participantes->map(function ($participante) {
+        return [
+            'id' => $participante->participantes ?? null,
+            'name' => $participante->name ?? 'Sem Nome',
+        ];
+    }));
+
+    return view('deliberacoes', [
+        'atas' => $atas,
+        'participantes' => $participantes,
+        'deliberacoes' => $deliberacoes,
+        'usuarios' => $usuarios,
+    ]);
+}
 
     public function getHistoricoPage()
     {

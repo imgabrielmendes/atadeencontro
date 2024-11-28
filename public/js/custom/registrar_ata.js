@@ -61,10 +61,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 window.location.href = `/ata/${response.id}`;
             },
             error: function (xhr, status, error) {
-                // alert('Ocorreu um erro ao registrar a ata. Por favor, tente novamente.');
-                // console.error('Erro na solicitação AJAX:', error);
-                // console.error('Status:', status);
-                // console.error('Response:', xhr.responseText);
+                alert('Ocorreu um erro ao registrar a ata. Por favor, tente novamente.');
+                console.error('Erro na solicitação AJAX:', error);
+                console.error('Status:', status);
+                console.error('Response:', xhr.responseText);
             }
         });
     }

@@ -107,13 +107,13 @@ public function insertTextoPrincipal(Request $request)
 {
     Log::info('Dados recebidos para o texto principal:', $request->all());
 
-    $validatedData = $request->validate([
+    $validacao = $request->validate([
         'id_ata' => 'required|integer',
         'caixadetexto' => 'required|string|max:255',
     ]);
 
-    $id_ata = $validatedData['id_ata'];
-    $textoPrincipal = $validatedData['caixadetexto'];
+    $id_ata = $validacao['id_ata'];
+    $textoPrincipal = $validacao['caixadetexto'];
 
     try {
         $dados = [
@@ -138,19 +138,19 @@ public function insertTextoPrincipal(Request $request)
     }
 }
 
-public function insertDeliberacoes(Request $request){
+public function insertDeliberacoes(Request $request)
+{
+    Log::info("Deliberacoes recebidas:", $request->all());
 
-    log::info("Deliberacoes recebidas:" , $request->all());
-
-    $validatedData = $request->validate([
+    $validacao = $request->validate([
         'id_ata' => 'required|integer',
         'deliberacao' => 'required',
-        'participantes' => 'required',
+        'participantes' => 'required|array',
     ]);
 
-    $id_ata = $validatedData['id_ata'];
-    $deliberacao = $validatedData['deliberacao'];
-    $participantes = $validatedData['participantes'];
+    $id_ata = $validacao['id_ata'];
+    $deliberacao = $validacao['deliberacao'];
+    $participantes = $validacao['participantes'];
 
     $dados = [];
     foreach ($participantes as $part) {
@@ -164,10 +164,14 @@ public function insertDeliberacoes(Request $request){
     try {
         DB::connection('mysql_other')->table('atareu.deliberacoes')->insert($dados);
 
+        $usuarios = User::whereIn('id', $participantes)->get();
+
         return response()->json([
             'success' => true,
             'message' => 'Deliberacoes registradas com sucesso!',
-            'id' => $id_ata
+            'id' => $id_ata,
+            'deliberacao' => $deliberacao,
+            'users' => $usuarios,
         ]);
 
     } catch (\Exception $e) {
@@ -178,6 +182,6 @@ public function insertDeliberacoes(Request $request){
             'message' => 'Erro ao registrar os participantes. Tente novamente mais tarde.',
         ]);
     }
-
-}    
+}
+  
 }
