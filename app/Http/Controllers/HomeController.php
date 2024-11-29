@@ -107,19 +107,25 @@ class HomeController extends Controller
     ]);
 }
 
-    public function getHistoricoPage()
-    {
-        $usuarioId = Auth::id();
-        // return $usuarioId;
-
-        $ata = home::ataInformationsforID($usuarioId);
-        // return $ata;
-
-        $dados = [
-            "ata" => $ata
-        ];
-
-        return view('historico', $dados)->render();
+public function getHistoricoPage()
+{
+    $usuarioId = Auth::id();
+    
+    // Retorna as atas associadas ao usuário
+    $atas = home::ataInformationsforID($usuarioId);
+    
+    // Verificando o status da ata e atribuindo o valor correto
+    foreach ($atas as $ata) {
+        if (isset($ata->status) && $ata->status == 1) {
+            $ata->status_text = "Aberto"; // Adicionando status como uma propriedade
+        } else {
+            $ata->status_text = "Fechado"; // Caso contrário, definindo como "Fechado"
+        }
     }
+
+    // Passando as atas para a view
+    return view('historico', ['atas' => $atas]);
+}
+
 
 }

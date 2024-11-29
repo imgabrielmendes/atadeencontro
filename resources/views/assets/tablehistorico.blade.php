@@ -13,27 +13,29 @@
             </tr>
         </thead>
 <tbody>
+    @foreach($atas as $ata)
+    <tr>
+        <td class="align-middle">{{$ata->data_solicitada}}</td>
+        <td class="align-middle">{{$ata->objetivo}}</td>
+        <td class="text-start">{{$ata->tema}}</td>
+        <td class="text-start">{{$ata->local}}</td>        
+        <!-- Verificando o status diretamente na view -->
+        <td class='align-middle status-cell'>
+            @if($ata->status == 1) 
+                <span class="badge rounded-pill text-bg-success">Aberto</span>
+                @elseif($ata->status == 2 ) <span class="badge text-bg-warning">Editavel</span>
+                @else <span class="badge rounded-pill text-bg-danger">Fechado</span>
+            @endif
+        </td>
 
-@foreach($ata as $atas)
-<tr>
-<td class='align-middle' onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->data_solicitada}} </td>
-<td class='align-middle' onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->objetivo}} </td>
-<td class='text-start'   onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->tema}} </td>
-<td class='text-start'' onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->local}}</td>
-<td class='align-middle status-cell' onclick='abrirModalDetalhes(" . json_encode($row) . ")'> {{$atas->status}} 
-{{-- <td class='align-middle status-cell' onclick='abrirModalDetalhes(" . json_encode($row) . ")'> . ($row['status'] === 'ABERTA' ? <span class='badge bg-primary'>ABERTA</span>" : "<span class='badge bg-success'>FECHADA</span>") . </td> --}}
-
-<td class='text-center align-middle'>
-        <a href='pagatribuida.php?updateid=".$id."' class='btn btn-warning' style='color: white;'>
-            <button class='text-center align-middle' style='color:white; border: none; background: transparent;'>&plus;</button>
-        </a>
-    </td>
-    <td class='text-center align-middle'>
-        <a href='pagatribuida.php?updateid=".$id."' class='btn btn-warning' style='color: white;'>
-            <button class='text-center align-middle' style='color:white; border: none; background: transparent;'>&plus;</button>
-        </a>
-    </td>
+        <td class='text-center align-middle'>
+            <a href='pagatribuida.php?updateid={{$ata->id}}' class='btn btn-warning' style='color: white;'>
+                <button class='text-center align-middle' style='color:white; border: none; background: transparent;'>&plus;</button>
+            </a>
+        </td>
+    </tr>
 @endforeach
+
 
     
 {{-- // código para exibir as colunas da tabela...
