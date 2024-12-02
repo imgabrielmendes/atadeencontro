@@ -17,5 +17,5 @@
         <div id="no-results" class="p-2 text-gray-500 text-center hidden">Nenhuma opção encontrada</div>
     </div>
 
-    <script src="{{ asset('js/custom/dadousu.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/custom/dadousu.js') }}" defer></script> --}}
 </div>

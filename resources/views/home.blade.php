@@ -92,5 +92,5 @@
     </div>
   </div>
 </div>
-<script src="{{ asset('js\custom\multiselect.js') }}" defer></script>
+{{-- <script src="{{ asset('js\custom\multiselect.js') }}" defer></script> --}}
 @endsection

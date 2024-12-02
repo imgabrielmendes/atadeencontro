@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         if (!data || !hora_inicio || !hora_final || !objetivoSelecionado || !local || !tema) {
-            alert('Por favor, preencha todos os campos obrigatórios.');
+            mostrarAlerta("Erro", "Você deve preencher a deliberação antes de enviar.", "error");
             return;
         }
 
