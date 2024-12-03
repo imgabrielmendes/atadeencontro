@@ -7,6 +7,13 @@
   <div class="form-group col-8 mt-5">
     <div class="row">
 
+      {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+    <li><a class="dropdown-item" href="#"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
+    </li> --}}
+
       <div class="position-relative top-0 start-50 translate-middle-x m-4">
         <div class="progress" role="progressbar" aria-label="Progress" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="height: 1px;">
           <div class="progress-bar" style="width: 50%"></div>

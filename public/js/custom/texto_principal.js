@@ -50,10 +50,8 @@ function registrarTexto() {
                             cancelButtonText: "Finalizar ata"
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                // Ação caso o usuário confirme
                                 console.log("Usuário escolheu continuar.");
                             } else if (result.dismiss === Swal.DismissReason.cancel) {
-                                // Ação caso o usuário cancele
                                 console.log("Usuário escolheu cancelar.");
                                 window.location.href = `/historico`;
                             }

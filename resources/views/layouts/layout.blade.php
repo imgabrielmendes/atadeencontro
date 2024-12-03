@@ -9,14 +9,15 @@
     
     @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
 
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    {{-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> --}}
 
-    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
+    {{-- <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
 
-    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css"> --}}
     
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css"> --}}
 
+    <link rel="stylesheet" href="{{ asset('css/custom/navbar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom/multiselect.css') }}">
 
@@ -26,17 +27,21 @@
 </head>
 <body>
 
+    <nav class="navbar navbar-expand-lg fixed-top">
     @include('assets/header')
+    </nav>
 
     <div class="container-fluid">
     
-        <main>
+        <main class="content">
             @yield('content')
         </main>
 
     </div>
 
     @include('assets/footer')
+    
+</body>
 
     <script src="{{ asset('js\custom\multiselect.js') }}" defer></script>
     <script src="{{ asset('js/custom/dadousu.js') }}" defer></script>

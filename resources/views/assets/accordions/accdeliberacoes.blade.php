@@ -6,7 +6,6 @@
             </div>
         </h2>
 
-        <!-- Fase de Deliberações -->
         <div class="accordion-collapse collapse show">
             <div class="accordion-body" style="background-color: rgba(240, 240, 240, 0.41);">
                 <div class="row" id="deliberacoes-container">

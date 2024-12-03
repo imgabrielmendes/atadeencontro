@@ -6,6 +6,16 @@ body {
     justify-content: space-between; /* Garante que o rodapé fique na parte inferior */
 }
 
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 140px); /* 100vh (altura total da tela) menos a altura do header e footer */
+    margin: 0 auto;
+    padding: 20px; /* Adicione o preenchimento necessário */
+    box-sizing: border-box;
+}
+
 header {
     display: flex;
     flex-direction: column;

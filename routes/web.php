@@ -8,10 +8,12 @@ use App\Http\Controllers\InsertsController;
 
 use App\Models\home;
 use App\Models\inserts;
+use App\Http\Controllers\AtividadesUserController;
 
 
 Route::get('/', function () { return redirect('/home'); });
 Route::get('/home', [HomeController::class, 'getHome'])->middleware(['auth', 'verified']);
+Route::get('/atividades', [AtividadesUserController::class, 'Home'])->middleware(['auth', 'verified']);
 
 Route::get('/participantes', [HomeController::class, 'participantes'])->middleware(['auth', 'verified']);
 
