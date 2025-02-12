@@ -36,9 +36,9 @@
 
     @include('assets/header')
 
-    <div class="container-fluid">
+    <div class="container-fluid mb-1 mt-4">
     
-    <main>
+    <main class="">
         @yield('content')
     </main>
 

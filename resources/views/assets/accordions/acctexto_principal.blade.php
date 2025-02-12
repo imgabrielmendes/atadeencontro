@@ -23,7 +23,7 @@
     </div>   
       
     <div class="d-flex justify-content-center">
-          <button id="btntextoregistrar" type="button" class="btn btn-primary" data-bs-toggle="modal">Registrar Texto</button>
+          <button id="btntextoregistrar" type="button" class="btn btn-primary mt-3" data-bs-toggle="modal">Registrar Texto</button>
       </div>
         </div>          
     </div>

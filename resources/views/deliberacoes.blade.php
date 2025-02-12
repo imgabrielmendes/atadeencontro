@@ -30,13 +30,21 @@
 
 </div>
 
-{{-- ACCORDION da caixa do texto principal --}}
+<!-- /**
+ *
+ * @file resources/views/accordions.acctexto_principal.blade.php
+ */ -->
 @include("assets.accordions.acctexto_principal")
 
-{{-- ACCORDION da caixa de deliberações --}}
+<!-- /**
+ * @file resources/views/deliberacoes.blade.php
+ */ -->
 @include("assets.accordions.accdeliberacoes")
 
-{{-- Toast de notificação --}}
+<!-- /**
+* Toast de notificação
+* @file resources/views/assets/toast/toast_descricaoadicionada.blade.php
+*/ -->
 @include("assets.toast.toast_descricaoadicionada")
 @include("assets.toast.toast_deliberacaoatribuida")
 @include("assets.toast.toast_deliberacaoexcluida")

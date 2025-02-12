@@ -9,34 +9,29 @@
         <!-- Fase de Deliberações -->
         <div class="accordion-collapse collapse show">
             <div class="accordion-body" style="background-color: rgba(240, 240, 240, 0.41);">
-                <div class="row" id="deliberacoes-container">
-                    @foreach ($deliberacoes as $delib)
-                        <div class="col-md-6 mb-2" id="deliberacao-{{ $delib['id'] ?? $loop->index }}">
-                            <div class="card overflow-hidden">
-                                <div class="card-content">
-                                    <div class="card-body clearfix">
-                                        <div class="media align-items-stretch">
-                                            <div class="text-start media-body align-self-center">
-                                                <h4 class="text-primary">Deliberação:</h4>
-                                                <p class="mb-2">{{ $delib['deliberacoes'] }}</p>
+            <div class="row" id="deliberacoes-container">
+    @foreach ($deliberacoes as $delib)
+        <div class="col-md-6 mb-4" id="deliberacao-{{ $delib['id'] ?? $loop->index }}">
+            <div class="card shadow-sm border-light rounded">
+                <div class="card-body">
+                    <h5 class="card-title text-primary font-weight-bold">Deliberação:</h5>
+                    <p class="card-text mb-3">{{ $delib['deliberacoes'] }}</p>
 
-                                                <h4 class="text-secondary">Deliberados:</h4>
-                                                <ul class="list-unstyled">
-                                                    @foreach ($delib['users'] as $user)
-                                                        <li>
-                                                            <i class="icon-user success"></i>
-                                                            <strong>{{ $user->name }}</strong>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+                    <h6 class="text-secondary font-weight-bold">Deliberados:</h6>
+                    <ul class="list-unstyled pl-3">
+                        @foreach ($delib['users'] as $user)
+                            <li class="d-flex align-items-center mb-2">
+                                <i class="icon-user text-success mr-2" style="font-size: 1.5rem;"></i>
+                                <strong class="text-dark">{{ $user->name }}</strong>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
+            </div>
+        </div>
+    @endforeach
+</div>
+
             </div>
         </div>
 
@@ -48,19 +43,35 @@
                 </div>
 
                 <div class="col">
-                    <!-- Caixa de Seleção para Facilitadores -->
                     <div class="mb-2">
                         <label for="facilitadores" class="mb-2">Deliberado para:</label>
-                        @include("multiselect") <!-- Aqui o componente multiselect -->
+                        <select id="multiselect_deliberacoes" name="usuarios[]" multiple class="form-control">
+                            @foreach($usuarios as $usuario)
+                                <option value="{{ $usuario->id }}">
+                                    {{ $usuario->name}}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
+                <script>
+                    $(document).ready(function() {
+                        $('#multiselect_deliberacoes').select2({
+                            placeholder: "Selecione os facilitadores...",
+                            allowClear: false,
+                            width: '100%',
+                            closeOnSelect: false,
+                            theme: "classic",
+                            tags: false,
+                        });
+                    });
+                </script>
 
                 <div class="col-12">
                     <ul id="caixadeselecaodel"></ul>
                 </div>
             </div>
 
-            <!-- Botões de Ação -->
             <div class="col d-flex justify-content-center align-content-center mb-3">
                 <button type="button" id="btnfinalizar" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalFinalizar">Finalizar Encontro</button>
                 <button type="button" id="addItemButton" class="btn btn-success">Criar deliberações</button>

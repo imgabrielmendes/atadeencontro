@@ -1,5 +1,7 @@
-<footer style="font-weight:normal">
-    <div class="text-center">
-        <div class="col-11">Copyright © 2024 <a href="http://www.hospitalriogrande.com.br/" target="_blank">Hospital Rio Grande</a>. Todos os direitos reservados. Versão 0.0.1</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse mt-3 mb-3" id="">
+
     </div>
-</footer>
+  </div>
+</nav>

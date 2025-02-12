@@ -6,13 +6,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function registrarDeliberacao() {
-        var selectedOptions = new Set();
-        document.querySelectorAll("#options-container .cursor-pointer").forEach(function(optionElement) {
-            if (optionElement.classList.contains('bg-gray-100')) {
-                selectedOptions.add(optionElement.dataset.id);
-            }
-        });
-    
+
+        var deliberante= $('#multiselect_deliberacoes').val(); // Captura os IDs dos participantes selecionados
+
         var urlParts = window.location.pathname.split('/');
         var ataId = urlParts[urlParts.length - 1];
         var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -27,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
             url: '/registrardeliberacao',
             method: 'POST',
             data: {
-                participantes: Array.from(selectedOptions),
+                participantes: deliberante,
                 deliberacao: deliberacao,
                 id_ata: ataId,
                 _token: token

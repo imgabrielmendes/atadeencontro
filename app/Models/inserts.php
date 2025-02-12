@@ -112,7 +112,7 @@ class inserts extends Model
 
 public function insertTextoPrincipal(Request $request)
 {
-    Log::info('Dados recebidos para o texto principal:', $request->all());
+    Log::info('Texto principal:', $request->all());
 
     $validacao = $request->validate([
         'id_ata' => 'required|integer',

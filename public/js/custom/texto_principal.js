@@ -29,7 +29,7 @@ function registrarTexto() {
         success: function(response) {
             if (response.success) {
 
-                document.getElementById("caixadetexto").value = response.caixadetexto;
+                document.getElementById("caixadetexto").value = response.textoprincipal;
 
                 Swal.fire({
                     title: "Sucesso!",
