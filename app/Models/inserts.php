@@ -24,7 +24,7 @@ class inserts extends Model
         'data_solicitada' => $request->data,
         'hora_inicial' => $request->horainicio,
         'hora_termino' => $request->horat,
-        'objetivo' => $request->objetivos,
+        'objetivo' => 1,
         'local' => $request->local,
         'tema' => $request->tema,
         'status' => 1

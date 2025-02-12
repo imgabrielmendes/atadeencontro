@@ -13,24 +13,31 @@ use Illuminate\Support\Facades\Log;
 class HomeController extends Controller
 {
 
-
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function getHome()
     {
         $locais = home::getAllLocais();
-        $usuarios = home::getAllUsers()->unique('id');
-
-        // return $usuarios;
+        $usuarios = home::getAllUsers();
     
         $data = [
-            "usuarios" => $usuarios->values(),
+            "usuarios" => $usuarios,
             "locais" => $locais
         ];
     
-        // return $usuarios;
-        return view('home', $data)->render();
+        return view('home', $data);
     }
     
 
+    /**
+     * Undocumented function
+     *
+     * @param float $id ID da ata em que vai trazer os participantes selecionados pelo Admin da ata
+     * @return void
+     */
     public function getParticipantesPage($id)
     {
         $usuarios = home::getAllUsers();

@@ -6,38 +6,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function registrarata() {
-
         var data = document.getElementById("datainicio").value;
         var hora_inicio = document.getElementById("horainicio").value;
         var hora_final = document.getElementById("horaterm").value;
-
-        var objetivo = document.querySelector("input[name='objetivo']:checked");
-        var objetivoSelecionado = objetivo ? objetivo.value : null;
-
+        var objetivo = document.getElementById("objetivo-select").value; // Captura o valor selecionado de 'objetivo'
         var local = document.getElementById("pegarlocal").value;
         var tema = document.getElementById("temaprincipal").value;
 
-        var selectedOptions = new Set();
-        document.querySelectorAll("#options-container .cursor-pointer").forEach(function(optionElement) {
-            if (optionElement.classList.contains('bg-gray-100')) {
-                selectedOptions.add(optionElement.dataset.id);
-            }
-        });
-
-        if (!data || !hora_inicio || !hora_final || !objetivoSelecionado || !local || !tema) {
-            alert('Por favor, preencha todos os campos obrigatórios.');
-            return;
-        }
+        // Capturando os facilitadores selecionados no multiselect
+        var facilitadores = $('#multiselect').val(); // Captura os IDs dos facilitadores selecionados
 
         console.log("Dados capturados:");
-
         console.log({
             data,
             horainicio: hora_inicio,
             horat: hora_final,
-            objetivos: objetivoSelecionado,
+            objetivos: objetivo, // Adiciona o valor do objetivo
             local,
-            facilitadores: Array.from(selectedOptions),
+            facilitadores: facilitadores, // Envia facilitadores como um array
             tema
         });
 
@@ -50,18 +36,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 data: data,
                 horainicio: hora_inicio,
                 horat: hora_final,
-                objetivos: objetivoSelecionado,
+                objetivos: objetivo, // Envia o objetivo na requisição
                 local: local,
-                facilitadores: Array.from(selectedOptions),
+                facilitadores: facilitadores, // Incluindo os facilitadores
                 tema: tema,
                 _token: token
             },
             success: function (response) {
-                // alert('Ata registrada com sucesso!');
+                // Caso a requisição seja bem-sucedida, redireciona para a página da ata
                 window.location.href = `/ata/${response.id}`;
             },
             error: function (xhr, status, error) {
-                alert('Ocorreu um erro ao registrar a ata. Por favor, tente novamente.');
                 console.error('Erro na solicitação AJAX:', error);
                 console.error('Status:', status);
                 console.error('Response:', xhr.responseText);

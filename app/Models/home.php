@@ -18,7 +18,7 @@ class home extends Model
 
     public static function getAllLocais()
     {
-        $table = "hrg_centralservicos.perfil";
+        $table = "atareu.locais";
         $fields = "*";
         $where = "";
     
@@ -28,7 +28,12 @@ class home extends Model
 
     public static function getAllUsers()
     {
-        return User::all();
+        $table = "atareu.facilitadores";
+        $fields = "*";
+        $where = "";
+    
+        $dadosMySql = DB::connection('mysql')->select("SELECT $fields FROM $table");
+        return $dadosMySql;
        
     }
 
@@ -53,7 +58,7 @@ class home extends Model
             FROM atareu.ata_has_fac as ahf
                 INNER JOIN atareu.assunto as ass ON ass.id = ahf.id_ata
                 INNER JOIN l_breeze.users as usu ON usu.id = ahf.facilitadores
-                INNER JOIN hrg_centralservicos.sistema as sis ON sis.id = ass.local
+                INNER JOIN atareu.sistema as sis ON sis.id = ass.local
                 
             WHERE ahf.id_ata = ?
             order by usu.name asc
