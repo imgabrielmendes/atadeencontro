@@ -16,9 +16,26 @@
     
                       <div class="row">
                         <div class="mt-3 mb-3" > 
-                          @include("multiselect")
-
-            </div>
+                        <select id="multiselect_participante" name="usuarios[]" multiple class="form-control">
+    @foreach($usuarios as $usuario)
+        <option value="{{ $usuario->id }}">
+            {{ $usuario->name}}
+        </option>
+    @endforeach
+</select>
+                        </div>
+            <script>
+    $(document).ready(function() {
+        $('#multiselect_participante').select2({
+            placeholder: "Selecione os facilitadores...",
+            allowClear: false,
+            width: '100%',
+            closeOnSelect: false,
+            theme: "classic",
+            tags: false,
+        });
+    });
+</script>
               
               </form>
               <div  class="row">

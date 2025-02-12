@@ -9,10 +9,15 @@ use App\Http\Controllers\InsertsController;
 use App\Models\home;
 use App\Models\inserts;
 
-
+/**
+ * Rotas para o CADASTRO DO FORMULÁRIO 1
+ */
 Route::get('/', function () { return redirect('/home'); });
 Route::get('/home', [HomeController::class, 'getHome'])->middleware(['auth', 'verified']);
 
+/**
+ * Rotas para o CADASTRO DO FORMULÁRIO 2
+ */
 Route::get('/participantes', [HomeController::class, 'participantes'])->middleware(['auth', 'verified']);
 
 Route::post('/registrarata', [inserts::class, 'insertAta'])->middleware(['auth', 'verified']);

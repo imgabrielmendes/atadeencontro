@@ -20,26 +20,21 @@
             <div class="col">
                 <div>
                     <div>
-                        <div class="row">
-                            @foreach ($participantes as $usuario)
-                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
-                                    <div class="card overflow-hidden">
-                                        <div class="card-content">
-                                            <div class="card-body clearfix">
-                                                <div class="media align-items-stretch">
-                                                    <div class="align-self-center">
-                                                        <i class="icon-user success font-large-2 float-right mr-4"></i>
-                                                    </div>
-                                                    <div class="text-start media-body align-self-center">
-                                                        <h4>{{$usuario->name}}</h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+                    <div class="row g-3">
+    @foreach ($participantes as $usuario)
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-body text-center p-4">
+                    <div class="d-flex flex-column align-items-center">
+                        <i class="icon-user text-success display-4 mb-3"></i>
+                        <h5 class="fw-bold mb-1">{{ $usuario->name }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
+
                     </div>
                 </div>
             </div>

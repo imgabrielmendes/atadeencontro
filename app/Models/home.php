@@ -28,7 +28,7 @@ class home extends Model
 
     public static function getAllUsers()
     {
-        $table = "atareu.facilitadores";
+        $table = "l_breeze.users";
         $fields = "*";
         $where = "";
     

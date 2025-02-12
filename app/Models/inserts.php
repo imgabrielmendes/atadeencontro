@@ -18,29 +18,33 @@ class inserts extends Model
      */
     public function insertAta(Request $request)
 {
-    Log::info('Dados recebidos:', $request->all());
+    // Log::info('Dados recebidos:', $request->all());
 
     $dados = [
         'data_solicitada' => $request->data,
         'hora_inicial' => $request->horainicio,
         'hora_termino' => $request->horat,
-        'objetivo' => 1,
+        'objetivo' => $request->objetivos,
         'local' => $request->local,
         'tema' => $request->tema,
         'status' => 1
     ];
 
     $id = DB::connection('mysql_other')->table('atareu.assunto')->insertGetId($dados);
+    log::info($id);
+
 
     if ($id) {
 
         $facilitadores = $request->facilitadores;
+        $userId = auth()->id();
 
         $dadosFacilitadores = [];
         foreach ($facilitadores as $facilitadorId) {
             $dadosFacilitadores[] = [
                 'id_ata' => $id,
-                'facilitadores' => $facilitadorId
+                'facilitadores' => $facilitadorId,
+                'create' => $userId,
             ];
         }
 
@@ -64,10 +68,13 @@ class inserts extends Model
      */
     public function insertParticipantes(Request $request)
 {
-    Log::info('Dados recebidos:', $request->all());
+    // Log::info('Dados recebidos:', $request->all());
 
     $id_ata = $request->input('id_ata');
     $participantes = $request->participantes;
+
+    // log::info('ID da ata:', $id_ata);
+    log::info('participantes:', $participantes);
 
     if (empty($participantes) || !is_array($participantes)) {
         return response()->json(['success' => false, 'message' => 'Nenhum participante foi informado.']);

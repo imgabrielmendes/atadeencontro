@@ -41,13 +41,13 @@ class HomeController extends Controller
     public function getParticipantesPage($id)
     {
         $usuarios = home::getAllUsers();
-        $atas = json_decode(json_encode(home::lastAtaforuser($id)));        
+        $atas = home::lastAtaforuser($id);
     
-        foreach ($atas as $ata) {
-            if (!empty($ata->data_solicitada)) {
-                $dataRegistro = new \DateTime($ata->data_solicitada);
-                $ata->data_solicitada_formatada = $dataRegistro->format('d/m/Y');
-            }
+        // Testa se a consulta realmente retorna algo
+        if (empty($atas)) {
+            Log::info("Nenhuma ata encontrada para o usuário ID: " . $id);
+        } else {
+            Log::info("Atas encontradas:", ['atas' => $atas]);
         }
     
         return view('participantes', [
@@ -55,6 +55,7 @@ class HomeController extends Controller
             'atas' => $atas,
         ])->render();
     }
+    
     
 
     public function getDeliberacoesPage($id)

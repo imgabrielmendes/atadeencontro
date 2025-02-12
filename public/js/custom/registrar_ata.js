@@ -42,6 +42,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 tema: tema,
                 _token: token
             },
+            xhrFields: {
+                withCredentials: true
+            },
             success: function (response) {
                 // Caso a requisição seja bem-sucedida, redireciona para a página da ata
                 window.location.href = `/ata/${response.id}`;

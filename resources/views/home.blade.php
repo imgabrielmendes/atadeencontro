@@ -58,7 +58,7 @@
         <select id="multiselect" name="usuarios[]" multiple class="form-control">
     @foreach($usuarios as $usuario)
         <option value="{{ $usuario->id }}">
-            {{ $usuario->nome_facilitador }}
+            {{ $usuario->name}}
         </option>
     @endforeach
 </select>
