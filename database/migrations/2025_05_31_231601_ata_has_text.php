@@ -6,15 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
-    protected $connection = 'mysql';
-
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+        // Tabela textoprinc
+        Schema::create('ata_has_text', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('id_ata')->constrained('ata');
+            $table->text('text')->nullable();
         });
     }
 
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('ata_has_text');
     }
 };

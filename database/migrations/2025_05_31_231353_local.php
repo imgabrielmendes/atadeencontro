@@ -6,13 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    protected $connection = 'mysql_other';
-
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('homes', function (Blueprint $table) {
+        // Tabela locais
+        Schema::create('local', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('nome', 50)->nullable();
+            $table->boolean('status')->nullable();
         });
     }
 
@@ -21,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('homes');
+        Schema::dropIfExists('local');
     }
 };

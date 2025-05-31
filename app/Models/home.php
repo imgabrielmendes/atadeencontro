@@ -18,7 +18,7 @@ class home extends Model
 
     public static function getAllLocais()
     {
-        $table = "atareu.locais";
+        $table = "local";
         $fields = "*";
         $where = "";
     
@@ -28,7 +28,7 @@ class home extends Model
 
     public static function getAllUsers()
     {
-        $table = "l_breeze.users";
+        $table = "users";
         $fields = "*";
         $where = "";
     
@@ -55,10 +55,10 @@ class home extends Model
             SELECT *,
                 usu.name as nome,
                 sis.nome as local
-            FROM atareu.ata_has_fac as ahf
-                INNER JOIN atareu.assunto as ass ON ass.id = ahf.id_ata
-                INNER JOIN l_breeze.users as usu ON usu.id = ahf.facilitadores
-                INNER JOIN atareu.sistema as sis ON sis.id = ass.local
+            FROM atadeencontro.ata_has_fac as ahf
+                INNER JOIN assunto as ass ON ass.id = ahf.id_ata
+                INNER JOIN users as usu ON usu.id = ahf.facilitadores
+                INNER JOIN sistema as sis ON sis.id = ass.local
                 
             WHERE ahf.id_ata = ?
             order by usu.name asc

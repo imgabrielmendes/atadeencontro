@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    protected $connection = 'mysql_other';
+    protected $connection = 'mysql';
 
     public function up(): void
     {
