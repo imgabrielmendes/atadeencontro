@@ -16,6 +16,8 @@ class home extends Model
 {
     use HasFactory;
 
+    
+
     public static function getAllLocais()
     {
         $table = "local";

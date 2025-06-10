@@ -1,5 +1,5 @@
 <select 
-  class="{{ $class ?? 'form-select' }}" 
+  class="form-control"
   id="{{ $id }}" 
   name="{{ $name ?? $id }}" 
   aria-label="{{ $ariaLabel ?? $label ?? 'Seleção' }}"

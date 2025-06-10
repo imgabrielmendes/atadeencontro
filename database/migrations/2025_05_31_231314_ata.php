@@ -11,19 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-                // Tabela assunto
+        // Tabela assunto
         Schema::create('ata', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 255);
             $table->char('id_objetivo', 3);
-            $table->foreignId('id_local')->constrained('local');
+            $table->unsignedBigInteger('id_local');
             $table->timestamp('dthr_registro');
             $table->dateTime('dthr_solicitada')->nullable();
             $table->time('hr_inicial')->nullable();
             $table->time('hr_termino')->nullable();
             $table->time('hr_estimado')->nullable();
             $table->char('status', 5)->nullable();
-        });
+
+            $table->foreign('id_local')->references('id')->on('local')->onDelete('cascade');
+});
+
     }
 
     /**

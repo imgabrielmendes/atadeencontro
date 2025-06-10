@@ -70,7 +70,9 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap4-theme@1.3.0/dist/select2-bootstrap4.min.css" rel="stylesheet" />
 
+    <script src="{{ asset('js/custom/home.js') }}" defer></script>
     <script src="{{ asset('js/custom/finalizar_ata.js') }}" defer></script>
     <script src="{{ asset('js/custom/alerts.js') }}" defer></script>
     <script src="{{ asset('js/custom/deliberacoes.js') }}" defer></script>

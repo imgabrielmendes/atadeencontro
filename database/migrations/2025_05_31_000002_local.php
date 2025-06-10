@@ -13,9 +13,10 @@ return new class extends Migration
     {
         // Tabela locais
         Schema::create('local', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // cria BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY
             $table->string('nome', 50)->nullable();
             $table->boolean('status')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\home;
+use App\Models\local;
+use App\Models\usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,24 +15,59 @@ use Illuminate\Support\Facades\Log;
 class HomeController extends Controller
 {
 
-    /**
+        /**
      * Undocumented function
      *
      * @return void
      */
-    public function getHome()
-    {
-        $locais = home::getAllLocais();
-        $usuarios = home::getAllUsers();
-    
-        $data = [
-            "usuarios" => $usuarios,
-            "locais" => $locais
-        ];
-    
-        return view('home', $data);
-    }
-    
+public function getHome()
+{
+    $locais = local::getAllLocais();
+    $usuarios = usuario::getAllUsers();
+
+    return view('home.home', [
+        'locais' => $locais,
+        'usuarios' => $usuarios
+    ]);
+}
+
+
+/**
+     * Undocumented function
+     *
+     * @return void
+*/
+public function InputRow()
+{
+    $locais = local::getAllLocais()->toArray();
+    $usuarios = usuario::getAllUsers()->toArray();
+
+    $inputLocal = view('utils.fixed-select', 
+    [
+        'id' => 'selectLocal',
+        'label' => 'Local',
+        'placeholder' => 'Escolha o local desejado',
+        'options' => array_map(fn($l) => ['value' => $l['id'], 'label' => $l['nome']], $locais),
+
+    ])->render();
+
+    $inputUsuario = view('utils.fixed-select', 
+    [
+        'id' => 'selectUsuario',
+        'label' => 'Usuário',
+        'placeholder' => 'Escolha o usuário desejado',
+        'options' => array_map(fn($u) => ['value' => $u['id'], 'label' => $u['name']], $usuarios),
+
+    ])->render();
+
+    $col1 = "<div class='col-md-6'>{$inputLocal}</div>";
+    $col2 = "<div class='col-md-6'>{$inputUsuario}</div>";
+
+    $row = "<div class='row'>{$col1}{$col2}</div>";
+
+    return $row;
+
+}
 
     /**
      * Undocumented function
@@ -56,8 +93,6 @@ class HomeController extends Controller
         ])->render();
     }
     
-    
-
     public function getDeliberacoesPage($id)
     {
         $atas = collect(home::lastAtaforuser($id));
