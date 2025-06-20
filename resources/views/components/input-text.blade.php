@@ -1,19 +1,20 @@
 @props([
-    'id',
-    'label',
+    'id' => '',
+    'label' => '',
     'disabled' => false,
     'type' => 'text',
     'name' => '',
     'value' => '',
 ])
-<div class="form-group">
-<label for="{{ $id }}">{{ $label }}</label>
-<input
-    {{ $disabled ? 'disabled' : '' }}
-    {{ $attributes->merge([
-        'type' => $type,
-        'name' => $name,
-        'value' => old($name, $value),
-        'class' => 'border-gray-300 dark:border-gray-700 focus:border-indigo-500 dark:focus:border-indigo-600 rounded-md shadow-sm',
-    ]) }}>
+
+<div class="form-group mb-3">
+    <label for="{{ $id }}" class="form-label">{{ $label }}</label>
+    <input
+        id="{{ $id }}"
+        type="{{ $type }}"
+        name="{{ $name }}"
+        value="{{ old($name, $value) }}"
+        @if($disabled) disabled @endif
+        {{ $attributes->merge(['class' => 'form-control']) }}
+    >
 </div>

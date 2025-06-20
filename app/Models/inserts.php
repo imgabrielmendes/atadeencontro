@@ -18,47 +18,59 @@ class inserts extends Model
      */
     public function insertAta(Request $request)
 {
-    // Log::info('Dados recebidos:', $request->all());
+    //dd($request->all());
 
     $dados = [
-        "nome " => $request->tituloAta,
-        "id_local" =>  $request->LocalAta,
-        "dthr_solicitada " => $request->dthrInicioAta,
-        "hr_estimado " => $request->tempoEstimadoAta,
+        "nome" => $request->tituloAta,
+        "id_local" => $request->localAta,
+        "id_objetivo" => $request->objetivoAta,
+        "dthr_solicitada" => $request->dthrInicioAta,
+        "hr_estimado" => $request->tempoEstimadoAta,
         "status" => 1
     ];
 
-    $id = DB::connection('mysql')->table('atadeencontro.ata')->insertGetId($dados);
+    try {
+        $id = DB::connection('mysql')->table('atadeencontro.ata')->insertGetId($dados);
 
+        if ($id) {
+            $userId = auth()->id();
 
-    if ($id) {
+            $facilitadores = $request->facilitadores ?? [];
 
-        $facilitadores = $request->facilitadores;
-        $userId = auth()->id();
+            if (!in_array($userId, $facilitadores)) {
+                $facilitadores[] = $userId;
+            }
 
-        $dadosFacilitadores = [];
-        foreach ($facilitadores as $facilitadorId) {
-            $dadosFacilitadores[] = [
-                'id_ata' => $id,
-                'facilitadores' => $facilitadorId,
-                'create' => $userId,
-            ];
+            $dadosFacilitadores = [];
+            foreach ($facilitadores as $facilitadorId) {
+                $dadosFacilitadores[] = [
+                    'id_ata' => $id,
+                    'id_user' => $facilitadorId
+                ];
+            }
+
+            DB::connection('mysql')->table('atadeencontro.ata_has_user')->insert($dadosFacilitadores);
+
+            // $descricaoAta = $request->descricaoAta;
+            // $dadosDescricao = [];
+            
+            // $dadosDescricao[] = [
+            //         'id_ata' => $id,
+            //         'id_user' => $facilitadorId
+            //     ];
+            
+
         }
 
-        try {
-            DB::connection('mysql_other')->table('atareu.ata_has_fac')->insert($dadosFacilitadores);
+        return response()->json(['success' => true, 'message' => 'Ata e facilitadores registrados com sucesso!', 'id' => $id]);
 
-            return response()->json(['success' => true, 'message' => 'Ata e facilitadores registrados com sucesso!', 'id' => $id]);
-
-        } catch (\Exception $e) {
-            Log::error('Erro ao inserir facilitadores:', ['error' => $e->getMessage()]);
-
-            return response()->json(['success' => false, 'message' => 'Ata registrada, mas falha ao registrar os facilitadores: ' . $e->getMessage()], 500);
-        }
-    } else {
-        return response()->json(['success' => false, 'message' => 'Falha ao registrar a ata.'], 500);
+    } catch (\Exception $e) {
+        Log::error('Erro ao inserir ata e facilitadores:', ['error' => $e->getMessage()]);
+        return response()->json(['success' => false, 'message' => 'Erro ao registrar ata e facilitadores: ' . $e->getMessage()], 500);
     }
-}   
+}
+
+
     /**
      * 
      * Método responsável em enviar o ID dos participantes da ata para o DB

@@ -8,7 +8,7 @@
         <x-col size="4">
             <x-input-text
                 id="input-titulo-ata"
-                name="titulo"
+                name="input-titulo-ata"
                 label="Título da Ata"
                 required
                 autofocus
@@ -19,7 +19,7 @@
             <x-datetime-picker 
                 id="date-select-inicio-ata"
                 label="Data e hora de início"
-                name="inicio"
+                name="date-select-inicio-ata"
                 :required="true"
             />
         </x-col>
@@ -29,7 +29,7 @@
                 id="input-tempoestimado-ata"
                 class="form-control" 
                 type="number" 
-                name="tempo" 
+                name="input-tempoestimado-ata" 
                 :value="old('tempo')" 
                 required 
                 autocomplete="tempo" 
@@ -41,7 +41,8 @@
     <x-row>
         <x-col size="4">
             <x-select 
-                id="select-setor-ata" 
+                id="select-setor-ata"
+                name="select-setor-ata" 
                 label="Selecione o Setor da reunião" 
                 placeholder="Escolha o setor"
                 :options="$setores->map(fn($l) => ['value' => $l->id, 'label' => $l->nome])"
@@ -51,7 +52,18 @@
         <x-col size="4">
             <x-select 
                 id="select-local-ata" 
+                name="localAta"
                 label="Selecione a sala da reunião" 
+                placeholder="Escolha a sala"
+                :options="$locais->map(fn($l) => ['value' => $l->id, 'label' => $l->nome])"
+            />
+        </x-col>
+
+        <x-col size="4">
+            <x-select 
+                id="select-objetivo-ata" 
+                name="select-objetivo-ata"
+                label="Selecione o objetivo da reunião" 
                 placeholder="Escolha a sala"
                 :options="$locais->map(fn($l) => ['value' => $l->id, 'label' => $l->nome])"
             />
@@ -61,9 +73,8 @@
     <x-row>
         <x-col size="6">
             <x-select 
-                id="select-participate-ata" 
+                id="select-participante-ata" 
                 label="Informe os participantes" 
-                placeholder="Escolha um ou mais usuários"
                 name="usuarios[]"
                 :options="$usuarios->map(fn($u) => ['value' => $u->id, 'label' => $u->name])"
                 :multiple="true"
