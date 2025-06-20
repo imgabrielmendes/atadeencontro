@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class local extends Model
+class setor extends Model
 {
     use HasFactory;
 
-    protected $table = 'local';
+    protected $table = 'setor';
     protected $primaryKey = 'id';
 
     protected $fillable = [
@@ -19,17 +19,7 @@ class local extends Model
     ];
 
 
-    public static function getAllLocais(){
+    public static function getAllSetores(){
         return self::all(); 
     }
-
-
-    public function getLocalForId($id){
-
-    } 
-
-    public function getAtaForLocal(){
-
-    }
-
 }

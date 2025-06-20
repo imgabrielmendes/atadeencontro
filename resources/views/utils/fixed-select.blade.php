@@ -1,6 +1,7 @@
 <select 
   class="form-control"
-  id="{{ $id }}" 
+  id="{{ $id }}"
+  type="{{ $type }}"
   name="{{ $name ?? $id }}" 
   aria-label="{{ $ariaLabel ?? $label ?? 'Seleção' }}"
 >

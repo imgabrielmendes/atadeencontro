@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         var urlParts = window.location.pathname.split('/');
         var ataId = urlParts[urlParts.length - 1];
-
         var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         $.ajax({

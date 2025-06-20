@@ -21,17 +21,14 @@ class inserts extends Model
     // Log::info('Dados recebidos:', $request->all());
 
     $dados = [
-        'data_solicitada' => $request->data,
-        'hora_inicial' => $request->horainicio,
-        'hora_termino' => $request->horat,
-        'objetivo' => $request->objetivos,
-        'local' => $request->local,
-        'tema' => $request->tema,
-        'status' => 1
+        "nome " => $request->tituloAta,
+        "id_local" =>  $request->LocalAta,
+        "dthr_solicitada " => $request->dthrInicioAta,
+        "hr_estimado " => $request->tempoEstimadoAta,
+        "status" => 1
     ];
 
-    $id = DB::connection('mysql_other')->table('atareu.assunto')->insertGetId($dados);
-    log::info($id);
+    $id = DB::connection('mysql')->table('atadeencontro.ata')->insertGetId($dados);
 
 
     if ($id) {

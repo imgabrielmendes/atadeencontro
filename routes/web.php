@@ -21,6 +21,7 @@ Route::get('/home', [HomeController::class, 'getHome'])->middleware(['auth', 've
 Route::get('/participantes', [HomeController::class, 'participantes'])->middleware(['auth', 'verified']);
 
 Route::post('/registrarata', [inserts::class, 'insertAta'])->middleware(['auth', 'verified']);
+
 Route::post('/registrarparticipantes', [inserts::class, 'insertParticipantes'])->middleware(['auth', 'verified']);
 
 Route::post('/registrartexto', [Inserts::class, 'insertTextoPrincipal'])->middleware(['auth', 'verified']);

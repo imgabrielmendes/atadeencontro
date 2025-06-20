@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\home;
 use App\Models\local;
 use App\Models\usuario;
+use App\Models\setor;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,10 +26,12 @@ public function getHome()
 {
     $locais = local::getAllLocais();
     $usuarios = usuario::getAllUsers();
+    $setores = setor::getAllSetores();
 
     return view('home.home', [
         'locais' => $locais,
-        'usuarios' => $usuarios
+        'usuarios' => $usuarios,
+        'setores' => $setores
     ]);
 }
 
