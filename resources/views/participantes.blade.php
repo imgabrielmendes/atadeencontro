@@ -9,11 +9,11 @@
       
     <div class="form-group col-xl-9 col-lg-xs-sm-md-12 ">
 
-      @include('assets.alertaparticipantes')
+      @include('components.alertaparticipantes')
 
-      @include('assets.accordions.informacoesderegistro')
+      @include('components.accordions.informacoesderegistro')
 
-      @include('assets.accordions.accparticipantes')
+      @include('components.accordions.accparticipantes')
 
 
       <!--BOTÕES-->
@@ -61,7 +61,7 @@
 </div>
 
 <!------------------ MODAL ------------------>
-@include('assets.modals.registrarusuario')
+@include('components.modals.registrarusuario')
     
       </div>
 </div>
