@@ -57,9 +57,6 @@ function registrarAta() {
             }).then(() => {
                 window.location.href = `/ata/${response.id}`;
             });
-
-
-
         },
         error: function (xhr, status, error) {
             Swal.fire({

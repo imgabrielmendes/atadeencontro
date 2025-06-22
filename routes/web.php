@@ -32,8 +32,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/registrarata', [inserts::class, 'insertAta']);
     Route::post('/registrarparticipantes', [inserts::class, 'insertParticipantes']);
+    
     Route::post('/registrartexto', [Inserts::class, 'insertTextoPrincipal']);
     Route::post('/registrardeliberacao', [Inserts::class, 'insertDeliberacoes']);
+    
     Route::post('/finalizarata', [home::class, 'finalizarAta']);
 
     Route::prefix('profile')->group(function () {

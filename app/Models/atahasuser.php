@@ -16,12 +16,18 @@ class atahasuser extends Model
     use HasFactory;
     
 
-public static function getUsersAdmAta($idAta)
+/**
+ * Metodo usado para retornar para retornar os responsáveis da ata via ID
+ *
+ * @param int $dados
+ * @return void
+ */
+public static function getUsersAdmAta($dados)
 {
     
     $userIds = DB::connection('mysql')
         ->table('ata_has_user')
-        ->where('id_ata', $idAta)
+        ->where('id_ata', $dados)
         ->pluck('id_user');
 
     if ($userIds->isEmpty()) {
@@ -32,6 +38,30 @@ public static function getUsersAdmAta($idAta)
         ->table('users')
         ->whereIn('id', $userIds)
         ->get();
+}
+
+/**
+ * Metodo usado para retornar os participantes de uma ata via ID
+ *
+ * @param int $dados
+ * @return void
+ */
+public static function getUsersParticipantesForAta($dados){
+
+    $userIds = DB::connection('mysql')
+        ->table('ata_has_userparticipante')
+        ->where('id_ata', $dados)
+        ->pluck('id_user');
+
+    if ($userIds->isEmpty()) {
+        return collect();
+    }
+
+    return DB::connection('mysql')
+        ->table('users')
+        ->whereIn('id', $userIds)
+        ->get();
+
 }
 
 

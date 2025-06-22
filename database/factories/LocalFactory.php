@@ -17,23 +17,34 @@ class LocalFactory extends Factory
     public function definition(): array
     {
 
-    $locaisEmpresa = [
-        'Recepção',
-        'Almoxarifado',
-        'Sala de Reunião',
-        'Departamento de RH',
-        'Financeiro',
-        'TI',
-        'Copa',
-        'Gerência',
-        'Escritório',
-        'Auditoria'
-    ];
+        $locaisEmpresa = [
+            'Recepção',
+            'Auditório Principal',
+            'Sala de Reunião 1',
+            'Sala de Reunião 2',
+            'Departamento de Recursos Humanos',
+            'Departamento Financeiro',
+            'Centro de Processamento de Dados (CPD)',
+            'Laboratório de Informática',
+            'Área de Convivência',
+            'Refeitório',
+            'Copa',
+            'Estacionamento Interno',
+            'Almoxarifado',
+            'Sala da Diretoria',
+            'Sala da Gerência',
+            'Sala de Atendimento ao Cliente',
+            'Central de Chamados',
+            'Espaço de Treinamento',
+            'Biblioteca Corporativa',
+            'Sala de Impressão'
+        ];
 
-    return [
-        'nome' => $this->faker->randomElement($locaisEmpresa),
-        'status' => $this->faker->boolean(),
-    ];
+        return [
+            'nome' => $this->faker->unique()->randomElement($locaisEmpresa),
+            'status' => $this->faker->boolean(),
+            'id_local' => $this->faker->unique()->numberBetween(1, 100),
+        ];
     
     }
 }

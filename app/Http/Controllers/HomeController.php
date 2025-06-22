@@ -27,6 +27,7 @@ public function getHome()
 {
     $locais = local::getAllLocais();
     $usuarios = usuario::getAllUsers();
+    
     $setores = setor::getAllSetores();
 
     return view('home.home', [
@@ -50,10 +51,16 @@ public function getHome()
         $ataUsersAdm = atahasuser::getUsersAdmAta($id);
 
         $usuarios = usuario::getAllUsers();
+
         $usuariosOptions = $usuarios->map(fn($u) => [
             'value' => $u->id,
             'label' => $u->name,
         ])->toArray();
+
+        //dd($ataInformacoes);
+        //dd($usuariosOptions);
+        //dd($usuarios);
+
     
         return view('participantes', [
             'usuarios' => $usuarios,
@@ -64,67 +71,28 @@ public function getHome()
     
     public function getDeliberacoesPage($id)
     {
-        $atas = collect(home::lastAtaforuser($id));
-        $participantes = collect(home::lastParticipantesforata($id));
-        $deliberacoes_raw = collect(home::deliberacoesEdeliberadores($id));
-    
-        $deliberacoes = $deliberacoes_raw->reduce(function ($result, $item) {
-            $texto = $item->deliberacoes;
-            $usuario = DB::table('users')->where('name', $item->name)->first();
-    
-            if (!$usuario) {
-                return $result;
-            }
-    
-            if (!isset($result[$texto])) {
-                $result[$texto] = [
-                    'deliberacoes' => $texto,
-                    'users' => [],
-                ];
-            }
-    
-            if (!in_array($usuario, $result[$texto]['users'])) {
-                $result[$texto]['users'][] = $usuario;
-            }
-    
-            return $result;
-        }, []);
-    
-        $deliberacoes = array_values($deliberacoes);
-    
-        $atas = $atas->map(function ($ata) {
-            if (!empty($ata->data_solicitada)) {
-                $ata->data_solicitada_formatada = (new \DateTime($ata->data_solicitada))->format('d/m/Y');
-            }
-            return $ata;
-        });
-    
-        // Mapeia os facilitadores e participantes
-        $usuarios = $atas->map(function ($ata) {
-            return (object)[
-                'id' => $ata->facilitadores ?? null,
-                'name' => $ata->name ?? 'Sem Nome',
-            ];
-        });
-    
-        $usuarios = $usuarios->merge($participantes->map(function ($participante) {
-            return (object)[
-                'id' => $participante->participantes ?? null,
-                'name' => $participante->name ?? 'Sem Nome',
-            ];
-        }));
-    
-        // Remove usuários duplicados, mantendo apenas os únicos com base no 'id'
-        $usuarios = $usuarios->unique('id');
-    
-        // Log para checar os usuários únicos
-        log::info($usuarios);
-    
+
+        $ataInformacoes = home::getAtaInformationForId($id);
+
+        $ataUsersAdm = atahasuser::getUsersAdmAta($id);
+        
+        $ataUserParticipante = atahasuser::getUsersParticipantesForAta($id);
+
+        $usuarios = usuario::getAllUsers();
+
+        // dd($id);
+        // dd($ataUserParticipante);
+
+        $usuariosOptions = $usuarios->map(fn($u) => [
+            'value' => $u->id,
+            'label' => $u->name,
+        ])->toArray();
+            
         return view('deliberacoes', [
-            'atas' => $atas,
-            'participantes' => $participantes,
-            'deliberacoes' => $deliberacoes,
-            'usuarios' => $usuarios,
+            'ata' => $ataInformacoes,
+            'participantes' => $ataUserParticipante,
+            'usuarios' => $ataUsersAdm,
+            'usuariosOptions' => $usuariosOptions
         ]);
     }
     
@@ -148,6 +116,5 @@ public function getHistoricoPage()
     // Passando as atas para a view
     return view('historico', ['atas' => $atas]);
 }
-
 
 }

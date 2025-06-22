@@ -6,25 +6,30 @@
 
 <div class="box box-primary">
     <main class="container_fluid d-flex justify-content-center align-items-center">
-      
-    <div class="form-group col-xl-9 col-lg-xs-sm-md-12 ">
+    <input type="hidden" id="ata_id" value="{{ $ata->id }}">
+    <div class="form-group ">
 
-      <!-- @include('components.alertaparticipantes') -->
+    <x-row>
+          <div class="accordion" id="accordionPanelsStayOpenExample">
+            <x-composite.accordions.accordion-registro :ata="$ata" />
+          </div>
+    </x-row>
 
-      <div class="accordion" id="accordionPanelsStayOpenExample">
-        <x-composite.accordions.accordion-registro :ata="$ata" />
-      </div>
+    
+</div>
 
-      <div class="accordion" id="accordionPanelsStayOpenExample2">
-        <x-composite.accordions.accordion-participante :usuariosOptions="$usuariosOptions" />
-      </div>
+  <x-row>
+    <x-col>
+      <x-composite.accordions.accordion-participante :usuariosOptions="$usuariosOptions" 
+      :ata="$ata" />
 
-      </div>
-            <x-row>
+  </x-col>
+  </x-row>
 
+      <x-row>
         <x-col size="3">
             <x-button
-                id="btnparticipantes"
+                id="btn-registro-participante"
                 type="button"
                 color="success"
               >
@@ -41,9 +46,8 @@
           Ir para histórico
         </x-button>
         </x-col>
-
       </x-row>
-          </div>
+</div>
           
     
            

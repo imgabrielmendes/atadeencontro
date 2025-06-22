@@ -51,15 +51,15 @@ class inserts extends Model
 
             DB::connection('mysql')->table('atadeencontro.ata_has_user')->insert($dadosFacilitadores);
 
-            // $descricaoAta = $request->descricaoAta;
-            // $dadosDescricao = [];
-            
-            // $dadosDescricao[] = [
-            //         'id_ata' => $id,
-            //         'id_user' => $facilitadorId
-            //     ];
-            
+            $descricaoAta = $request->descricaoAta;
+            $dadosDescricao = [];
+            $dadosDescricao[] = [
+                    'id_ata' => $id,
+                    'text' => $descricaoAta
+                ];
 
+            DB::connection('mysql')->table('atadeencontro.ata_has_text')->insert($dadosDescricao);
+            
         }
 
         return response()->json(['success' => true, 'message' => 'Ata e facilitadores registrados com sucesso!', 'id' => $id]);
@@ -77,34 +77,32 @@ class inserts extends Model
      */
     public function insertParticipantes(Request $request)
 {
-    // Log::info('Dados recebidos:', $request->all());
-
-    $id_ata = $request->input('id_ata');
-    $participantes = $request->participantes;
-
-    // log::info('ID da ata:', $id_ata);
-    log::info('participantes:', $participantes);
-
-    if (empty($participantes) || !is_array($participantes)) {
-        return response()->json(['success' => false, 'message' => 'Nenhum participante foi informado.']);
+    if (!$request->has('participantesAta') || !$request->filled('ataId')) {
+    return response()->json([
+        'success' => false,
+        'message' => 'Dados ausentes ou incompletos.'
+        ], 422);
     }
 
-    $dados = [];
-    foreach ($participantes as $part) {
-        $dados[] = [
-            'id_ata' => $id_ata,
-            'participantes' => $part,
-        ];
-    }
+    $participanteId = $request->participantesAta;
+    $ataId = $request->ataId;
 
+    $dadosParticipante = [];
+    foreach ($participanteId as $idPart) {
+        $dadosParticipante[] = [
+                    'id_ata' => $ataId,
+                    'id_user' => $idPart
+                ];
+            }
+    
     try {
-        // Inserir todos os dados de uma vez
-        DB::connection('mysql_other')->table('atareu.participantes')->insert($dados);
+
+        DB::connection('mysql')->table('atadeencontro.ata_has_userparticipante')->insert($dadosParticipante);
 
         return response()->json([
             'success' => true,
             'message' => 'Ata e facilitadores registrados com sucesso!',
-            'id' => $id_ata
+            'id' => $ataId
         ]);
 
     } catch (\Exception $e) {

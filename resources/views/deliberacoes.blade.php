@@ -2,59 +2,40 @@
 @section('title', 'Ata de encontro | Home')
 @section('content')
 
-<!--PRIMEIRA LINHA DO FORMULÁRIO DA ATA---------------->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <div class="box box-primary">
 <main class="container_fluid d-flex justify-content-center align-items-center">
+<input type="hidden" id="ata_id" value="{{ $ata->id }}">
+
 <div class="form-group col-xl-9 col-lg-xs-sm-md-12">
-  <div class="row"> 
 
-
-@include('components.composite.accordions.informacoesderegistro')
+    <x-row>
+          <div class="accordion" id="accordionPanelsStayOpenExample">
+            <x-composite.accordions.accordion-registro :ata="$ata" />
+          </div>
+    </x-row>  
     
-<div class="accordion" id="accordionPanelsStayOpenExample">
-
-<div class="accordion-item shadow">
-
-<div class="row">
-<div class="col-lg-6  col-lg-md-12 col-md-12">
-
-</div>
-</div>
-</div>
 </div>
 
-@include('components.composite.accordions.accparticipante_adicionados')
-    
-</div>     
-</div>
-</div>
-</div>
+  <x-row>
+    <x-col>
 
-</div>
+      <x-composite.accordions.accordion-participatesadicionados :participantes="$participantes" 
+      :ata="$ata" />
 
-<!-- /**
- *
- * @file resources/views/accordions.acctexto_principal.blade.php
- */ -->
-@include("components.composite.accordions.acctexto_principal")
+  </x-col>
+  </x-row>
 
-<!-- /**
- * @file resources/views/deliberacoes.blade.php
- */ -->
-@include("components.composite.accordions.accdeliberacoes")
-
-<!-- /**
-* Toast de notificação
-* @file resources/views/components.composite/toast/toast_descricaoadicionada.blade.php
-*/ -->
-@include("components.composite.toast.toast_descricaoadicionada")
-@include("components.composite.toast.toast_deliberacaoatribuida")
-@include("components.composite.toast.toast_deliberacaoexcluida")
-
-</form>
-  
 </main>
-
 </div>
+
+
+  @include("components.composite.toast.toast_descricaoadicionada")
+  @include("components.composite.toast.toast_deliberacaoatribuida")
+  @include("components.composite.toast.toast_deliberacaoexcluida")
+
+
+
 
 @endsection

@@ -15,13 +15,13 @@ class usuario extends Model
     protected $fillable = [
         'id',
         'name',
-        'email',
-        'cpf',
-        'matricula',
+        // 'email',
+        // 'cpf',
+        // 'matricula',
     ];
 
     public static function getAllUsers()
     {
-        return self::all(); 
+        return self::all();
     }
 }

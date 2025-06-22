@@ -23,7 +23,7 @@
                     <x-input-text
                         class=" form-control bg-body-secondary"
                         disabled
-                        value="{{ $ata->dthr_solicitada ?? 'Não informada' }}"
+                        value="{{ \Carbon\Carbon::parse($ata->dthr_solicitada)->format('d/m/Y H:i') }}"
                     />
                 </x-col>
 
