@@ -6,6 +6,7 @@ use App\Models\home;
 use App\Models\local;
 use App\Models\usuario;
 use App\Models\setor;
+use App\Models\atahasuser;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Log;
 class HomeController extends Controller
 {
 
-        /**
+    /**
      * Undocumented function
      *
      * @return void
@@ -35,44 +36,6 @@ public function getHome()
     ]);
 }
 
-
-/**
-     * Undocumented function
-     *
-     * @return void
-*/
-public function InputRow()
-{
-    $locais = local::getAllLocais()->toArray();
-    $usuarios = usuario::getAllUsers()->toArray();
-
-    $inputLocal = view('utils.fixed-select', 
-    [
-        'id' => 'selectLocal',
-        'label' => 'Local',
-        'placeholder' => 'Escolha o local desejado',
-        'options' => array_map(fn($l) => ['value' => $l['id'], 'label' => $l['nome']], $locais),
-
-    ])->render();
-
-    $inputUsuario = view('utils.fixed-select', 
-    [
-        'id' => 'selectUsuario',
-        'label' => 'Usuário',
-        'placeholder' => 'Escolha o usuário desejado',
-        'options' => array_map(fn($u) => ['value' => $u['id'], 'label' => $u['name']], $usuarios),
-
-    ])->render();
-
-    $col1 = "<div class='col-md-6'>{$inputLocal}</div>";
-    $col2 = "<div class='col-md-6'>{$inputUsuario}</div>";
-
-    $row = "<div class='row'>{$col1}{$col2}</div>";
-
-    return $row;
-
-}
-
     /**
      * Undocumented function
      *
@@ -81,19 +44,21 @@ public function InputRow()
      */
     public function getParticipantesPage($id)
     {
-        $usuarios = home::getAllUsers();
-        $atas = home::lastAtaforuser($id);
-    
-        // Testa se a consulta realmente retorna algo
-        if (empty($atas)) {
-            Log::info("Nenhuma ata encontrada para o usuário ID: " . $id);
-        } else {
-            Log::info("Atas encontradas:", ['atas' => $atas]);
-        }
+
+        $ataInformacoes = home::getAtaInformationForId($id);
+
+        $ataUsersAdm = atahasuser::getUsersAdmAta($id);
+
+        $usuarios = usuario::getAllUsers();
+        $usuariosOptions = $usuarios->map(fn($u) => [
+            'value' => $u->id,
+            'label' => $u->name,
+        ])->toArray();
     
         return view('participantes', [
             'usuarios' => $usuarios,
-            'atas' => $atas,
+            'ata' => $ataInformacoes,
+            'usuariosOptions' => $usuariosOptions
         ])->render();
     }
     

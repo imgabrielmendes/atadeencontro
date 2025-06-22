@@ -9,44 +9,40 @@
       
     <div class="form-group col-xl-9 col-lg-xs-sm-md-12 ">
 
-      @include('components.alertaparticipantes')
+      <!-- @include('components.alertaparticipantes') -->
 
-      @include('components.accordions.informacoesderegistro')
-
-      @include('components.accordions.accparticipantes')
-
-
-      <!--BOTÕES-->
-      <div class="container-fluid   justify-content-center ">
-        <div class="row">
-          
-          <div class="p-2 col-lg-3 col-md-5 col-sm-12">
-          <button id="btnparticipantes" type="button" class="btn form-control btn-success" data-bs-toggle="modal">
-            Prosseguir com a ata
-          </button>
-
-          <script>
-            var id_ata = ' echo id_ata; '; 
-            function abrirDeliberacoes(){
-                window.location.href = 'pagdeliberacoes.php?updateid=' + id_ata;
-            }
-          </script>
-
-        </div>
-
-        {{-- ///////////// --}}
-        
-        <div class="p-2 col-lg-3 col-md-5 col-sm-12">
-          <a href="/historico"  class="btn form-control btn-primary">
-              Ir para histórico
-          </a>
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <x-composite.accordions.accordion-registro :ata="$ata" />
       </div>
-      
-          </div>
 
-          </div>
-            </div>
-            <br>
+      <div class="accordion" id="accordionPanelsStayOpenExample2">
+        <x-composite.accordions.accordion-participante :usuariosOptions="$usuariosOptions" />
+      </div>
+
+      </div>
+            <x-row>
+
+        <x-col size="3">
+            <x-button
+                id="btnparticipantes"
+                type="button"
+                color="success"
+              >
+              Prosseguir com a ata
+            </x-button>
+        </x-col>
+
+        <x-col size="3">
+          <x-button
+            id=""
+            type="button"
+            color="primary"
+          >
+          Ir para histórico
+        </x-button>
+        </x-col>
+
+      </x-row>
           </div>
           
     

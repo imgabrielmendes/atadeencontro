@@ -95,7 +95,11 @@
 
     <x-row class="mt-4">
         <x-col size="12">
-            <x-button id="btn-iniciarAta" type="button" color="success" icon="fas fa-check">
+            <x-button 
+            id="btn-iniciarAta" 
+            type="button" 
+            color="success" 
+            icon="fas fa-check">
                 Salvar
             </x-button>
         </x-col>

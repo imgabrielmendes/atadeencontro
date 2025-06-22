@@ -1,8 +1,8 @@
 @props([
     'type' => 'button',
-    'color' => 'primary', // opções: primary, secondary, danger, success, warning
-    'size' => 'md',       // opções: sm, md, lg
-    'icon' => '',         // classe do ícone (ex: "fas fa-save")
+    'color' => 'primary',
+    'size' => 'md',
+    'icon' => '',
 ])
 
 @php

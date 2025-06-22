@@ -13,7 +13,7 @@ class inserts extends Model
     use HasFactory;
 
     /**
-     * 
+     * FUNCIONANDO
      * FUNÇÃO QUE REALIZA INSERT DO PRIMEIRO FORMULÁRIO
      */
     public function insertAta(Request $request)

@@ -7,7 +7,9 @@
 <main class="container_fluid d-flex justify-content-center align-items-center">
 <div class="form-group col-xl-9 col-lg-xs-sm-md-12">
   <div class="row"> 
-@include('assets.accordions.informacoesderegistro')
+
+
+@include('components.composite.accordions.informacoesderegistro')
     
 <div class="accordion" id="accordionPanelsStayOpenExample">
 
@@ -21,7 +23,7 @@
 </div>
 </div>
 
-@include('assets.accordions.accparticipante_adicionados')
+@include('components.composite.accordions.accparticipante_adicionados')
     
 </div>     
 </div>
@@ -34,20 +36,20 @@
  *
  * @file resources/views/accordions.acctexto_principal.blade.php
  */ -->
-@include("assets.accordions.acctexto_principal")
+@include("components.composite.accordions.acctexto_principal")
 
 <!-- /**
  * @file resources/views/deliberacoes.blade.php
  */ -->
-@include("assets.accordions.accdeliberacoes")
+@include("components.composite.accordions.accdeliberacoes")
 
 <!-- /**
 * Toast de notificação
-* @file resources/views/assets/toast/toast_descricaoadicionada.blade.php
+* @file resources/views/components.composite/toast/toast_descricaoadicionada.blade.php
 */ -->
-@include("assets.toast.toast_descricaoadicionada")
-@include("assets.toast.toast_deliberacaoatribuida")
-@include("assets.toast.toast_deliberacaoexcluida")
+@include("components.composite.toast.toast_descricaoadicionada")
+@include("components.composite.toast.toast_deliberacaoatribuida")
+@include("components.composite.toast.toast_deliberacaoexcluida")
 
 </form>
   

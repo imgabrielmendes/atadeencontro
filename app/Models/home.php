@@ -16,40 +16,24 @@ class home extends Model
 {
     use HasFactory;
 
-    
-
-    public static function getAllLocais()
-    {
-        $table = "local";
-        $fields = "*";
-        $where = "";
-    
-        $dadosMySql = DB::connection('mysql')->select("SELECT $fields FROM $table");
-        return $dadosMySql;
-    }
-
-    public static function getAllUsers()
-    {
-        $table = "users";
-        $fields = "*";
-        $where = "";
-    
-        $dadosMySql = DB::connection('mysql')->select("SELECT $fields FROM $table");
-        return $dadosMySql;
-       
-    }
-
     public static function pegarAtas()
     {
-        $table = "assunto";
+        $table = "ata";
         $fields = "*";
         $where = "";
 
-        $dadosMySql = DB::connection('mysql_other')->select("SELECT $fields FROM $table");
+        $dadosMySql = DB::connection('mysql')->select("SELECT $fields FROM $table");
 
         return $dadosMySql;
     }
 
+    public static function getAtaInformationForId($id)
+    {
+        return DB::connection('mysql')
+            ->table('ata')
+            ->where('id', $id)
+            ->first();
+    }
 
     public static function lastAtaforuser($dados)
     {
@@ -57,8 +41,8 @@ class home extends Model
             SELECT *,
                 usu.name as nome,
                 sis.nome as local
-            FROM atadeencontro.ata_has_fac as ahf
-                INNER JOIN assunto as ass ON ass.id = ahf.id_ata
+            FROM atadeencontro.ata_has_user as ahf
+                INNER JOIN ata as ass ON ass.id = ahf.id_ata
                 INNER JOIN users as usu ON usu.id = ahf.facilitadores
                 INNER JOIN sistema as sis ON sis.id = ass.local
                 
@@ -66,7 +50,7 @@ class home extends Model
             order by usu.name asc
         ";
     
-        $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
+        $dadosMySql = DB::connection('mysql')->select($query, [$dados]);
         return $dadosMySql;
     }
 
@@ -87,7 +71,7 @@ class home extends Model
                 order by us.name asc
         ";
 
-        $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
+        $dadosMySql = DB::connection('mysql')->select($query, [$dados]);
         return $dadosMySql;
     }
 
@@ -113,8 +97,8 @@ class home extends Model
         ahf.facilitadores,
         tp.texto_princ
 
-        FROM atareu.assunto as ass
-            INNER JOIN atareu.ata_has_fac as ahf
+        FROM atareu.ata as ass
+            INNER JOIN atareu.ata_has_user as ahf
                 ON ahf.id_ata = ass.id
             INNER JOIN atareu.textoprinc as tp
                 ON tp.id_ata = ass.id
@@ -125,7 +109,7 @@ class home extends Model
                 order by us.name asc
         ";
 
-        $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
+        $dadosMySql = DB::connection('mysql')->select($query, [$dados]);
         return $dadosMySql;
 
     }
@@ -144,7 +128,7 @@ class home extends Model
                 where del.id_ata = ?
         ";
 
-        $dadosMySql = DB::connection('mysql_other')->select($query, [$dados]);
+        $dadosMySql = DB::connection('mysql')->select($query, [$dados]);
         return $dadosMySql;
     }
 
@@ -158,8 +142,8 @@ class home extends Model
     
         $id_ata = $validatedData['id_ata'];
     
-        $updated = DB::connection('mysql_other')
-            ->table('atareu.assunto') 
+        $updated = DB::connection('mysql')
+            ->table('atareu.ata') 
             ->where('id', $id_ata)   
             ->update(['status' => '2']);
     

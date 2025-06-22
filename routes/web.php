@@ -27,7 +27,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('ata')->group(function () {
         Route::get('/{id}', [HomeController::class, 'getParticipantesPage']);
-        Route::get('/participantes/{id}', [HomeController::class, 'getParticipantesPage']);
         Route::get('/deliberacoes/{id}', [HomeController::class, 'getDeliberacoesPage']);
     });
 
